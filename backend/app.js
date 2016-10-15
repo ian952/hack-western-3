@@ -84,8 +84,9 @@ io.on ('connection', function(socket){
 
 		});
 
-		//yelp service
-		//make function to gen question
+		// yelpService.genQuestion (1).then((question) -> {
+			
+		// });
 	});
 
 });
