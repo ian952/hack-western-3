@@ -11,7 +11,7 @@
 	text-align: center;
 }
 .buttontext {
-	text-align: center;
+	display: inline;
 }
 
 /* backrounds 
@@ -22,16 +22,19 @@
 
 /* buttons */
 
-.btn {	
+.roombtn {	
 	border: 0 none;
-	letter-spacing: 35px;
 	text-transform: uppercase;
 	margin-top: 20px;
+	display: inline;
+	text-align: center;
+	font-size: 50px;
+	width: 300px;
 }
-.btn:focus, .btn:active:focus, .btn.active:focus {
+.roombtn:focus, .roombtn:active:focus, {
 	outline: 5px none;
 }
-.btn-lg {
+.roombtn-lg {
 	padding: 20px 40px;
 }
 .btn-brown{
@@ -43,13 +46,13 @@
 	color:white;
 }
 
-.btn:hover {
+.roombtn:hover {
   background: black;
   border: 3px solid #d5c2be;
 }
 
-.btn:active {
+.roombtn:active {
   background: #2e2e2e;
   border: 1px solid black;
   color: white;
-  }
+ }
