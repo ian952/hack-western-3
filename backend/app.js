@@ -57,6 +57,7 @@ io.on ('connection', function(socket){
 	/*
 		activeGroups: {[
 			group_ID:,
+			current_question:,
 			persons: [{
 				person:,
 				choices:[]
@@ -68,6 +69,7 @@ io.on ('connection', function(socket){
 		databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
 			activeGroups.push({
 				group_ID: data.group_ID,
+				current_question: 1,
 				persons: []
 			});
 
@@ -77,6 +79,8 @@ io.on ('connection', function(socket){
 					choices: []
 				});
 			});
+
+
 
 		});
 
