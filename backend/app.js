@@ -5,6 +5,7 @@ var io = require ('socket.io')(http);
 
 //services
 var databaseService = require ('./services/database.js');
+var yelpService = require ('./services/yelp.js');
 
 var activeGroups = [];
 
@@ -15,6 +16,9 @@ console.log ('Listening on 3000');
 app.get ('/', function(req, res) {
 	res.send('<html><body>Hi</body></html>');
 });
+
+yelpService.search ('University of Western Ontario', '40000')
+	
 
 io.on ('connection', function(socket){
 	console.log ('connected');
@@ -31,6 +35,7 @@ io.on ('connection', function(socket){
 		console.log ('Create room');
 		databaseService.createGroup(data.person_ID).then((groupId) => {
 			console.log('groupID: ' + groupId);
+			socket.join(groupId);
 			fn(groupId);
 		})
 	});
@@ -40,13 +45,30 @@ io.on ('connection', function(socket){
 
 		databaseService.joinGroup(data.person_ID, data.group_ID).then (() => {
 			databaseService.getPersonsInGroup(data.group_ID).then ((person_list) => {
-				io.emit('person_list', person_list);
+				socket.join(data.group_ID);
+				socket.broadcast.to(data.group_ID).emit('person_list', person_list);
 			});
 		});
 	});
 
 	socket.on('start',function(data){
+		databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
+			activeGroups.push({
+				group_ID: data.group_ID,
+				choices: []
+			});
 
+			person_list.map((person) => {
+				activeGroups[activeGroups.length - 1].choices.push({
+					person: person.person_ID,
+					choice: -1
+				});
+			});
+
+		});
+
+		//yelp service
+		//make function to gen question
 	});
 
 });
