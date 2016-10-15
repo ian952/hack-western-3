@@ -23,10 +23,8 @@ class Title extends React.Component {
   	const name = {
   		name: this.refs.nameForm.value
   	};
-  	socket.on('group', () => {
-  		socket.emit('newuser', name);
-  	});
-  	this.props.actions.setName(this.refs.nameForm.value);
+  	socket.emit('newuser', name);
+    this.props.actions.setName(this.refs.nameForm.value);
   	this.setState({
   		isShowingModal: false
   	})
@@ -36,11 +34,13 @@ class Title extends React.Component {
     return (
       <div>
         <h1 className='header'>Choose Chews</h1>
-        <FormView />
+        <div className='row'>
+        	<FormView />
+        </div>
         {
 	      	this.state.isShowingModal &&
 	        <ModalContainer onClose={this.handleClose}>
-	          <ModalDialog onClose={this.handleClose}>
+	          <ModalDialog>
 	            <h3>Enter your name:</h3>
 	            <input ref='nameForm'/>
 	            <button className='btn btn-danger' onClick={this.handleClose}> Enter </button>
