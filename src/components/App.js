@@ -20,14 +20,18 @@ class Title extends React.Component {
   }
 
   handleClose = () => {
+  	this.setState({
+  		isShowingModal: false
+  	})
+  }
+
+  submitName = () => {
   	const name = {
   		name: this.refs.nameForm.value
   	};
   	socket.emit('newuser', name);
     this.props.actions.setName(this.refs.nameForm.value);
-  	this.setState({
-  		isShowingModal: false
-  	})
+    this.handleClose();
   }
 
   render() {
@@ -40,10 +44,10 @@ class Title extends React.Component {
         {
 	      	this.state.isShowingModal &&
 	        <ModalContainer onClose={this.handleClose}>
-	          <ModalDialog>
+	          <ModalDialog onClose={this.handleClose}>
 	            <h3>Enter your name:</h3>
 	            <input ref='nameForm'/>
-	            <button className='btn btn-danger' onClick={this.handleClose}> Enter </button>
+	            <button className='btn btn-danger' onClick={this.submitName}> Enter </button>
 	          </ModalDialog>
 	        </ModalContainer>
       	}
