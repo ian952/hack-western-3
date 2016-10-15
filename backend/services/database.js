@@ -58,6 +58,8 @@ function joinGroup (person_ID, group_ID) {
 		  	reject(err);
 		  }
 		  //console.log('Connected to postgres! Getting schemas...');
+		  console.log (person_ID);
+		  console.log (group_ID);
 
 			client.query('UPDATE "PERSONS" SET "Group_ID" = $1 WHERE "Person_ID" = $2',[group_ID, person_ID], function (err, result) {
 				if (err) {
@@ -78,7 +80,7 @@ function getPersonsInGroup (group_ID) {
 		  	return;
 		  }
 		  //console.log('Connected to postgres! Getting schemas...');
-
+		  	console.log (group_ID);
 			client.query('SELECT "Person_ID", "Name" FROM "PERSONS" WHERE "Group_ID" = $1', [group_ID], function (err, result) {
 				if (err) {
 					console.log (err);

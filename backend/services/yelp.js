@@ -28,16 +28,18 @@ function popularCategory (data){
 				} else {
 					categoryCount[cur] ++;
 				}
-				console.log (cur);
+				//console.log (cur);
 			});
 		});
+
+		//console.log (categoryCount);
 
 		var sortable = [];
 		for (var cat in categoryCount)
 		      sortable.push([cat, categoryCount[cat]]);
 		sortable.sort(
 		    function(a, b) {
-		        return b[1] - a[1]
+		        return b[1] - a[1];
 		    }
 		);
 
@@ -47,6 +49,7 @@ function popularCategory (data){
 			res.push (sortable[i][0]);
 		}
 
+		//console.log (res);
 		resolve (res);
 	});
 }
