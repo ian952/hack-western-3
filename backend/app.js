@@ -45,9 +45,7 @@ io.on ('connection', function(socket){
 	socket.on ('join', function(data, fn){
 		console.log ('Join room');
 		databaseService.joinGroup(data.person_ID, data.group_ID).then (() => {
-			console.log('im here')
 			databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
-				console.log('then here')
 				socket.join(data.group_ID);
 				socket.broadcast.to(data.group_ID).emit('person_list', person_list);
 			});

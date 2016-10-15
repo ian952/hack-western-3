@@ -65,6 +65,7 @@ function joinGroup (person_ID, group_ID) {
 					reject(err);
 				}
 			});
+			resolve();
 		});
 	});
 }
