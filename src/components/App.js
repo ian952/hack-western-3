@@ -10,8 +10,11 @@ import { connect } from 'react-redux'
 const socket = io('http://localhost:3000');
 
 class Title extends React.Component {
-  state = {
-    isShowingModal: true
+  constructor(props) {
+    super(props);
+    this.state = {
+    	isShowingModal: true
+    };
   }
 
   handleClick = () => {
@@ -27,11 +30,11 @@ class Title extends React.Component {
   }
 
   submitName = () => {
-  	const name = {
+  	const data = {
   		name: this.refs.nameForm.value
   	};
-  	socket.emit('newuser', name, (userID) => {
-  		this.props.actions.setName(this.refs.nameForm.value, userID);
+  	socket.emit('newuser', data, (userID) => {
+  		this.props.actions.setName(data.name, userID);
   	});
     this.handleClose();
   }
@@ -84,7 +87,7 @@ class Title extends React.Component {
 
 function mapStateToProps (state) {
 	return {
-    name: state.UserStore.get('name')
+    user: state.UserStore.get('user')
   }
 }
 

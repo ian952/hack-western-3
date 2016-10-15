@@ -19,21 +19,16 @@ app.get ('/', function(req, res) {
 io.on ('connection', function(socket){
 	console.log ('connected');
 
-	socket.on ('newuser', function(data){
+	socket.on ('newuser', function(data, fn){
 		console.log (data.name + ' connected');
-
-		var p = new Promise (
-			function (resolve, reject) {
-				resolve(databaseService.createPerson(data.name))
-		})
-		p.then (
-			function (id) {
+		var p = new Promise((resolve, reject) => {
+			databaseService.createPerson(data.name).then((id) => {
 				console.log ('ID: ' + id);
-				socket.set('person_ID',{person_ID: id});
-				io.emit (id);
-			}
-		);
-
+				console.log('sending' + id);
+				fn(id);
+				resolve(id);
+			});
+		});
 	});
 
 	socket.on ('create', function(data){

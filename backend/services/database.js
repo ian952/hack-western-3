@@ -3,25 +3,27 @@ var pg = require('pg');
 pg.defaults.ssl = true;
 
 function createPerson (name) {
-	pg.connect(process.env.DATABASE_URL , function(err, client) {
-	  if (err) {
-	  	console.log ('Database connection failed');
-	  	return;
-	  }
-	  //console.log('Connected to postgres! Getting schemas...');
+	return new Promise((resolve, reject) => {
+	  	pg.connect(process.env.DATABASE_URL , function(err, client) {
+		  	if (err) {
+		  		console.log ('Database connection failed');
+		  		return;
+		  	}
+		  	//console.log('Connected to postgres! Getting schemas...');
 
-		client.query('INSERT INTO "PERSONS" ("Name") VALUES($1) Returning "Person_ID"',[name], function (err, result) {
-			if (err) {
-				console.log (err);
-				return;
-			}
+			client.query('INSERT INTO "PERSONS" ("Name") VALUES($1) Returning "Person_ID"',[name], function (err, result) {
+				if (err) {
+					reject(err);
+				}
 
-			//console.log (result);	
-			console.log (result.rows[0].Person_ID);
-			return result.rows[0].Person_ID;
+				//console.log (result);	
+				console.log (result.rows[0].Person_ID);
+				resolve(result.rows[0].Person_ID);
+			});
 		});
 	});
 }
+
 
 function createGroup (person_ID) {
 	pg.connect(process.env.DATABASE_URL , function(err, client) {
