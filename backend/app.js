@@ -17,7 +17,9 @@ app.get ('/', function(req, res) {
 	res.send('<html><body>Hi</body></html>');
 });
 
-yelpService.search ('University of Western Ontario', '40000')
+yelpService.search ('University of Western Ontario', '40000').then((data) => {
+	yelpService.popularCategory (data);
+});
 	
 
 io.on ('connection', function(socket){
@@ -55,13 +57,13 @@ io.on ('connection', function(socket){
 		databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
 			activeGroups.push({
 				group_ID: data.group_ID,
-				choices: []
+				persons: []
 			});
 
 			person_list.map((person) => {
-				activeGroups[activeGroups.length - 1].choices.push({
+				activeGroups[activeGroups.length - 1].persons.push({
 					person: person.person_ID,
-					choice: -1
+					choices: []
 				});
 			});
 
