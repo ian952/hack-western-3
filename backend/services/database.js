@@ -72,7 +72,7 @@ function getPersonsInGroup (group_ID) {
 	  }
 	  //console.log('Connected to postgres! Getting schemas...');
 
-		client.query('SELECT "Person_ID" FROM "PERSONS" WHERE "Group_ID" = $1', [group_ID], function (err, result) {
+		client.query('SELECT "Person_ID", "Name" FROM "PERSONS" WHERE "Group_ID" = $1', [group_ID], function (err, result) {
 			if (err) {
 				console.log (err);
 				return;
@@ -81,7 +81,10 @@ function getPersonsInGroup (group_ID) {
 			var personList = [];
 
 			result.rows.map((row) => {
-				personList.push(row.Person_ID);
+				personList.push({
+					person_ID: row.Person_ID,
+					name: row.Name
+				});
 			});
 
 			console.log (personList);

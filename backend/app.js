@@ -27,7 +27,7 @@ io.on ('connection', function(socket){
 		})
 		p.then (
 			function (id) {
-				socket.set('person_ID', id);
+				socket.set('person_ID',{person_ID: id});
 				io.emit (id);
 			}
 		);
@@ -37,7 +37,28 @@ io.on ('connection', function(socket){
 	socket.on ('create', function(data){
 		console.log ('Create room');
 
-		io.emit (databaseService.createGroup(data.person_ID));
+		io.emit ('group_ID',{group_ID:databaseService.createGroup(data.person_ID)});
+	});
+
+	socket.on ('join', function(data){
+		console.log ('Join room');
+
+		var p = new Promise (
+			function (resolve) {
+				resolve (databaseService.joinGroup (data.person_ID, data.group_ID));
+			});
+		p.then (function (){
+			var pp = new Promise (function(resolve){
+					resolve (databaseService.joinGroup(data.person_ID, data.group_ID));
+			});
+			pp.then (function() {
+				io.emit('person_list', databaseService.getPersonsInGroup(data.group_ID));
+			});
+		});
+	});
+
+	socket.on('start',function(data){
+		
 	});
 
 });
