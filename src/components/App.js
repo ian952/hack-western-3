@@ -1,22 +1,31 @@
 import React from 'react';
 import '../stylesheets/App.css';
-import '../stylesheets/push-bootstrap-button-pack-master/assets/css/buttons.css';
 import cx from 'classnames';
 const Title = React.createClass({
   render() {
     return (
-      <div className='container' style={{ background: '#343d46'}}>
-        <h1 className='header' style={{ color: 'white'}}>
-        	Choose Chews
-        </h1>
-      	<div className='center-block btn-group-vertical row'>
- 				<button className='btn btn-lg btn-primary raised round' style={{ margin: '30 0 0 0'}}> 
- 					Host 
- 				</button>
- 				<button className='btn btn-lg btn-primary raised round' style={{margin: '20 0 0 0'}}> 
- 					Join 
- 				</button>
- 		</div>
+      <div className={cx('window-size', 'clearfix')}>
+        <div className='container'>
+          <h1 className='header'>
+          	Choose Chews
+          </h1>
+            <div style={{ margin: '300 0 0 0'}}>
+              <div className='row'>
+                <div className='col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4'>
+       				   <button className={cx('btn','btn-lg', 'btn-brown')}> 
+       					    Host 
+       				   </button>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4'>
+       				   <button className={cx('btn', 'btn-lg', 'btn-grey')}> 
+                      Join 
+       				   </button>
+                </div>
+              </div>
+            </div>
+        </div>
       </div>
     );
   }

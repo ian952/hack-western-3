@@ -1,14 +1,55 @@
+/* header and text */
+
 .header {
 	text-align: center;
 	font-size: 100px;
-	font-color: white;
+	color: #3c0101 !important;
 }
 
-
+/* alignment */ 
 .alignedcenter {
 	text-align: center;
 }
+.buttontext {
+	text-align: center;
+}
 
-.rollovericons a{
-  margin: 10px;
+/* backrounds 
+.background-red{
+	background-color: rgb(176,35,54) !important;
+}
+*/
+
+/* buttons */
+
+.btn {	
+	border: 0 none;
+	letter-spacing: 35px;
+	text-transform: uppercase;
+	margin-top: 20px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+	outline: 5px none;
+}
+.btn-lg {
+	padding: 20px 40px;
+}
+.btn-brown{
+	background-color: #b02336 !important;
+	color: white;
+}
+.btn-grey{
+	background-color: #e55d71 !important;
+	color:white;
+}
+
+.btn:hover {
+  background: black;
+  border: 3px solid #d5c2be;
+}
+
+.btn:active {
+  background: #2e2e2e;
+  border: 1px solid black;
+  color: white;
   }
