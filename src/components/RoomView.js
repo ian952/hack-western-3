@@ -3,30 +3,23 @@ import io from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-class JoinRoom extends React.Component {
+class RoomView extends React.Component {
 	componentDidMount() {
-    const { socket, user, dispatch } = this.props;
-    socket.emit('chat mounted', user);
-    socket.on('user_join', (user) =>
-      actions.userJoin(user.name)
-    );
+    this.props.socket.on('person_list', (personList) => {
+    	console.log(personList);
+    });
   }
 
 	render() {
+		const roomNum = this.props.pageStore.get('roomID');
 		return (
-		{
-			this.state.userList.map((name) =>
-				return (
-					<h3> Name </h3>
-				);
-			)
-		});
+			<div className='container'>
+				<h3> Tell your friends to join room {roomNum}! </h3>
+
+			</div>
+		);
 	}
 }
 
-function mapStateToProps(state) {
-  return {
-      userList: state.get('userList');
-  }
-}
-export default connect(mapStateToProps)(JoinRoom)
+
+export default RoomView;
