@@ -6,7 +6,8 @@ import io from 'socket.io-client';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import * as userActions from '../actions/UserActions';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
 const socket = io('http://localhost:3000');
 
 class Title extends React.Component {
@@ -40,7 +41,14 @@ class Title extends React.Component {
   }
 
   makeRoom = () => {
-  	this.props.actions.makeRoom();
+  	const userID = this.props.userStore.getIn(['user', 'id']);
+  	const data = {
+  		userId: userID
+  	};
+  	console.log(userID);
+  	socket.emit('create', data, (roomID) => {
+  		console.log(roomID)
+  	});
   }
 
   render() {
@@ -87,7 +95,7 @@ class Title extends React.Component {
 
 function mapStateToProps (state) {
 	return {
-    user: state.UserStore.get('user')
+    userStore: state.UserStore
   }
 }
 

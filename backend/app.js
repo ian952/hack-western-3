@@ -21,20 +21,18 @@ io.on ('connection', function(socket){
 
 	socket.on ('newuser', function(data, fn){
 		console.log (data.name + ' connected');
-		var p = new Promise((resolve, reject) => {
-			databaseService.createPerson(data.name).then((id) => {
-				console.log ('ID: ' + id);
-				console.log('sending' + id);
-				fn(id);
-				resolve(id);
-			});
+		databaseService.createPerson(data.name).then((id) => {
+			console.log ('ID: ' + id);
+			fn(id);
 		});
 	});
 
-	socket.on ('create', function(data){
+	socket.on('create', function(data, fn){
 		console.log ('Create room');
-
-		io.emit ('group_ID',{group_ID:databaseService.createGroup(data.person_ID)});
+		databaseService.createGroup(data.person_ID).then((groupId) => {
+			console.log('groupID: ' + groupId);
+			fn(groupId);
+		})
 	});
 
 	socket.on ('join', function(data){
@@ -42,7 +40,7 @@ io.on ('connection', function(socket){
 
 		var p = new Promise (
 			function (resolve) {
-				resolve (databaseService.joinGroup (data.person_ID, data.group_ID));
+				resolve (databaseService.joinGroup(data.person_ID, data.group_ID));
 			});
 		p.then (function (){
 			var pp = new Promise (function(resolve){
