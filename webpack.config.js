@@ -1,39 +1,38 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-var plugins = [
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new ExtractTextPlugin('stylesheets/style.css', { allChunks: true })
-];
-
-if (process.env.NODE_ENV === 'production') {
-    plugins.push(new webpack.optimize.DedupePlugin());
-    plugins.push(new webpack.optimize.UglifyJsPlugin());
-}
+const path = require('path');
 
 module.exports = {
-    devtool: process.env.NODE_ENV !== 'production' ? 'eval' : null,
-
-    entry: {
-        app: './src/client/App.jsx',
-    },
-
-    output: {
-        path: './public',
-        publicPath: '/',
-        filename: '[name].js'
-    },
-
-    plugins: plugins,
-
-    module: {
-        loaders: [{
-            test: /\.jsx?$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/
-        }, {
-            test: /\.scss$/,
-            loader: ExtractTextPlugin.extract('css!sass')
-        }]
-    }
+  entry: [
+    'webpack-dev-server/client?http://localhost:8080',
+    './src/containers/main.js',
+    './src/stylesheets/main.scss'
+  ],
+  output: {
+    publicPath: '/public/',
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        loaders: ['react-hot-loader', 'babel-loader'],
+        include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        loader: 'url?limit=10000'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass!'
+      },
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+        loader: 'file'
+      }
+    ]
+  }
 };
