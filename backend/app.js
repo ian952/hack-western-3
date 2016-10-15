@@ -16,6 +16,8 @@ app.get ('/', function(req, res) {
 });
 
 io.on ('connection', function(socket){
+	console.log ('connected');
+	socket.emit ('Hey');
 	socket.on ('newuser', function(data){
 		console.log (data.name + ' connected');
 
@@ -35,5 +37,4 @@ io.on ('connection', function(socket){
 		io.emit (databaseService.createGroup(data.person_ID));
 	});
 
-	socket.on ('')
 });
