@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import TestStore from './TestReducer';
+import UserStore from './UserReducer';
 
 export default combineReducers(
   Object.assign({}, {
-  	TestStore
+  	UserStore
   })
 );

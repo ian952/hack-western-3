@@ -1,11 +1,9 @@
 import React from 'react';
 import InputButton from './InputButton';
-import io from 'socket.io-client'
-let socket = io(`http://localhost:8000`)
+import io from 'socket.io-client';
+let socket = io(`http://localhost:3000`);
 
 class FormView extends React.Component {
-
-
 	render() {
 		return (
 			<div className='container'>
