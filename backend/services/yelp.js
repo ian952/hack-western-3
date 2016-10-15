@@ -16,17 +16,17 @@ function search (location, radius){
 	});
 }
 
-function popularCategory (data){
-	return new Promise ((resolve,reject) => {
+// function popularCategory (data){
+// 	return new Promise ((resolve,reject) => {
 
-		.then ((data) => {
+// 		.then ((data) => {
 			
-		})
-		.catch ((err) => {
-			console.log (err);
-		});
-	});
-}
+// 		})
+// 		.catch ((err) => {
+// 			console.log (err);
+// 		});
+// 	});
+// }
 
 module.exports = (function() {
 	return {
