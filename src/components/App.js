@@ -6,8 +6,7 @@ import io from 'socket.io-client';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import * as userActions from '../actions/UserActions';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
+import { connect } from 'react-redux'
 const socket = io('http://localhost:3000');
 
 class Title extends React.Component {
@@ -41,14 +40,7 @@ class Title extends React.Component {
   }
 
   makeRoom = () => {
-  	const userID = this.props.userStore.getIn(['user', 'id']);
-  	const data = {
-  		userId: userID
-  	};
-  	console.log(userID);
-  	socket.emit('create', data, (roomID) => {
-  		console.log(roomID)
-  	});
+  	this.props.actions.makeRoom();
   }
 
   render() {
@@ -69,7 +61,18 @@ class Title extends React.Component {
 	          <h1 className='header'>
 	          	Choose Chews
 	          </h1>
-	            <div style={{ margin: '300 0 0 0'}}>
+            <div className='infotext row'>
+              <p1> 
+                Can't agree on where to eat? 
+              </p1>
+            </div> 
+            <div className='infotext row'>
+              <p2>
+                Join a friend's group or create your own, and get choosing.
+              </p2>
+            </div>
+
+	            <div style={{ margin: '25 50 50 60'}}>
 	              <div className='row'>
 	                <div className='col-md-3 col-md-offset-4 col-sm-2 col-sm-offset-4'>
 	       				   <button className={cx('roombtn','btn btn-lg', 'btn-brown')}
@@ -88,6 +91,9 @@ class Title extends React.Component {
 	            </div>
 		        </div>
 		      </div>
+          <div className='footer'>
+              Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
+            </div>
 		    </div>
     );
   };
@@ -95,7 +101,7 @@ class Title extends React.Component {
 
 function mapStateToProps (state) {
 	return {
-    userStore: state.UserStore
+    user: state.UserStore.get('user')
   }
 }
 

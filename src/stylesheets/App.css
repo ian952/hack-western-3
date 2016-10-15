@@ -1,4 +1,4 @@
-/* header and text */
+/* header, footer, and text */
 
 .header {
 	text-align: center;
@@ -6,19 +6,27 @@
 	color: #3c0101 !important;
 }
 
-/* alignment */ 
-.alignedcenter {
+.infotext{
 	text-align: center;
+	margin-top: 20px;
+	font-size: 50px;
+	font-family: monospace;
 }
+
 .buttontext {
 	display: inline;
 }
 
-/* backrounds 
-.background-red{
-	background-color: rgb(176,35,54) !important;
-}
-*/
+.footer{ 
+       position: fixed;     
+       text-align: left;    
+       bottom: 0px;
+       font-size: 20px;
+       margin-left: 10px;
+       margin-bottom: 10px;
+}  
+
+
 
 /* buttons */
 
