@@ -15,6 +15,14 @@ app.get ('/', function(req, res) {
 	res.send('<html><body>Hi</body></html>');
 });
 
-io.on ('connection',function(socket){
-	console.log ('connected');
-})
+io.on ('room', function(socket){
+	socket.on ('newuser', function(data){
+		console.log (data.name + ' connected');
+
+		return databaseService.createPerson(data.name);
+	});
+
+	socket.on ('create', function(data){
+
+	});
+});
