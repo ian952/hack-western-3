@@ -19,7 +19,7 @@ io.on ('room', function(socket){
 	socket.on ('newuser', function(data){
 		console.log (data.name + ' connected');
 
-		return databaseService.createPerson(data.name);
+		io.emit(databaseService.createPerson(data.name));
 	});
 
 	socket.on ('create', function(data){
