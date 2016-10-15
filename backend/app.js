@@ -15,7 +15,7 @@ app.get ('/', function(req, res) {
 	res.send('<html><body>Hi</body></html>');
 });
 
-io.on ('group', function(socket){
+io.on ('connection', function(socket){
 	socket.on ('newuser', function(data){
 		console.log (data.name + ' connected');
 
