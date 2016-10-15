@@ -1,0 +1,9 @@
+public/app.js
+public/common.js
+public/styleheets/
+rethinkdb_data/
+node_modules
+*.log
+
+dev.sh
+
