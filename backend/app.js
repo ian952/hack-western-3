@@ -15,6 +15,29 @@ app.get ('/', function(req, res) {
 	res.send('<html><body>Hi</body></html>');
 });
 
-io.on ('connection',function(socket){
+io.on ('connection', function(socket){
 	console.log ('connected');
-})
+
+	socket.on ('newuser', function(data){
+		console.log (data.name + ' connected');
+
+		var p = new Promise (
+			function (resolve, reject) {
+				resolve(databaseService.createPerson(data.name))
+		})
+		p.then (
+			function (id) {
+				socket.set('person_ID', id);
+				io.emit (id);
+			}
+		);
+
+	});
+
+	socket.on ('create', function(data){
+		console.log ('Create room');
+
+		io.emit (databaseService.createGroup(data.person_ID));
+	});
+
+});

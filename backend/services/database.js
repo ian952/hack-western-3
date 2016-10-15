@@ -2,7 +2,7 @@ var pg = require('pg');
 
 pg.defaults.ssl = true;
 
-function createPerson () {
+function createPerson (name) {
 	pg.connect(process.env.DATABASE_URL , function(err, client) {
 	  if (err) {
 	  	console.log ('Database connection failed');
@@ -10,7 +10,7 @@ function createPerson () {
 	  }
 	  //console.log('Connected to postgres! Getting schemas...');
 
-		client.query('INSERT INTO "PERSONS" VALUES(DEFAULT) Returning "Person_ID"', function (err, result) {
+		client.query('INSERT INTO "PERSONS" ("Name") VALUES($1) Returning "Person_ID"',[name], function (err, result) {
 			if (err) {
 				console.log (err);
 				return;
@@ -23,7 +23,7 @@ function createPerson () {
 	});
 }
 
-function createGroup () {
+function createGroup (person_ID) {
 	pg.connect(process.env.DATABASE_URL , function(err, client) {
 	  if (err) {
 	  	console.log ('Database connection failed');
@@ -37,12 +37,16 @@ function createGroup () {
 				return;
 			}
 
-			return result.rows[0].Group_ID;
+			var new_group_ID = result.rows[0].Group_ID;
+
+			client.query ('UPDATE "PERSONS" SET "Group_ID" = $1 WHERE "Person_ID" = $2',[new_group_ID, person_ID]);
+
+			return new_group_ID;
 		});
 	});
 }
 
-function joinGroup (person_ID, group_ID, name) {
+function joinGroup (person_ID, group_ID) {
 	pg.connect(process.env.DATABASE_URL , function(err, client) {
 	  if (err) {
 	  	console.log ('Database connection failed');
@@ -50,7 +54,7 @@ function joinGroup (person_ID, group_ID, name) {
 	  }
 	  //console.log('Connected to postgres! Getting schemas...');
 
-		client.query('UPDATE "PERSONS" SET "Group_ID" = $1, "Name" = $2 WHERE "Person_ID" = $3',[group_ID, name, person_ID], function (err, result) {
+		client.query('UPDATE "PERSONS" SET "Group_ID" = $1 WHERE "Person_ID" = $2',[group_ID, person_ID], function (err, result) {
 			if (err) {
 				console.log (err);
 				return;
