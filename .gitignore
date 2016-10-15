@@ -3,6 +3,7 @@ public/common.js
 public/styleheets/
 rethinkdb_data/
 node_modules
+/backend/node_modules
 *.log
 
 dev.sh
