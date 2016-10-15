@@ -5,14 +5,17 @@ import { connect } from 'react-redux';
 
 class RoomView extends React.Component {
 	componentDidMount() {
-    // this.props.socket.on('person_list', );
+    this.props.socket.on('person_list', (personList) => {
+    	console.log(personList);
+    });
   }
 
 	render() {
 		const roomNum = this.props.pageStore.get('roomID');
 		return (
-			<div>
-				<h3> You are in room {this.props.pageStore.roomID} </h3>
+			<div className='container'>
+				<h3> Tell your friends to join room {roomNum}! </h3>
+
 			</div>
 		);
 	}
