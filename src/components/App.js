@@ -1,12 +1,16 @@
 import React from 'react';
 import '../stylesheets/App.css';
-import cx from 'classnames';      
-import FormView from './Form';
+import cx from 'classnames';
 import io from 'socket.io-client';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import * as userActions from '../actions/UserActions';
+import * as pageActions from '../actions/PageActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import HomeView from './HomeView';
+import RoomView from './RoomView';
+import FormView from './Form';
+import * as pages from '../constants/PageTypes';
 const socket = io('http://localhost:3000');
 
 class Title extends React.Component {
@@ -39,8 +43,19 @@ class Title extends React.Component {
     this.handleClose();
   }
 
-  makeRoom = () => {
-  	this.props.actions.makeRoom();
+  routePage = () => {
+    switch(this.props.pageStore.get('currPage')) {
+
+      case pages.HOME:
+        return <HomeView socket={socket} userStore={this.props.userStore} actions={this.props.actions}/>
+
+      case pages.ROOM:
+        return <RoomView socket={socket}/>
+
+      default:
+        return null;
+    }
+
   }
 
   render() {
@@ -56,44 +71,7 @@ class Title extends React.Component {
 	          </ModalDialog>
 	        </ModalContainer>
       	}
-        <div className='container'>
-        	<div className={cx('window-size', 'clearfix')}>
-	          <h1 className='header'>
-	          	Choose Chews
-	          </h1>
-            <div className='infotext row'>
-              <p1> 
-                Can't agree on where to eat? 
-              </p1>
-            </div> 
-            <div className='infotext row'>
-              <p2>
-                Join a friend's group or create your own, and get choosing.
-              </p2>
-            </div>
-
-	            <div style={{ margin: '25 50 50 60'}}>
-	              <div className='row'>
-	                <div className='col-md-3 col-md-offset-4 col-sm-2 col-sm-offset-4'>
-	       				   <button className={cx('roombtn','btn btn-lg', 'btn-brown')}
-	       				   				 onClick={this.makeRoom}>
-	       					    Host 
-	       				   </button>
-	                </div>
-	              </div>
-	              <div className='row'>
-	                <div className='col-md-3 col-md-offset-4 col-sm-2 col-sm-offset-4'>
-	       				   <button className={cx('roombtn', 'btn btn-lg', 'btn-grey')}> 
-	                      Join 
-	       				   </button>
-	                </div>
-	              </div>
-	            </div>
-		        </div>
-		      </div>
-          <div className='footer'>
-              Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
-            </div>
+        {this.routePage()}
 		    </div>
     );
   };
@@ -101,13 +79,17 @@ class Title extends React.Component {
 
 function mapStateToProps (state) {
 	return {
-    user: state.UserStore.get('user')
+    userStore: state.UserStore,
+    pageStore: state.PageStore
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators(userActions, dispatch)
+    actions: bindActionCreators(Object.assign({},
+      userActions,
+      pageActions
+    ), dispatch)
   }
 }
 

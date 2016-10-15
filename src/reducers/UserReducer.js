@@ -1,12 +1,13 @@
 import Immutable from 'immutable';
-import { USER_JOIN, SET_NAME } from '../constants/ActionTypes.js';
+import { USER_JOIN, SET_NAME, MAKE_LEAD } from '../constants/ActionTypes.js';
 
 const initialState = Immutable.fromJS({
 	user: {},
-	userList: []
+	userList: [],
+	host: false
 });
 
-export default function AppState(state = initialState, action) {
+export default function UserStore(state = initialState, action) {
 	let newState = state;
 	
 	switch (action.type) {
@@ -16,7 +17,11 @@ export default function AppState(state = initialState, action) {
 		return newState;
 
 	case USER_JOIN: 
-		newState = initialState.updateIn('userList', (userList) => userList.push(action.response));
+		newState = state.updateIn('userList', (userList) => userList.push(action.response));
+		return newState;
+
+	case MAKE_LEAD:
+		newState = state.set('host', true)
 		return newState;
 
 	default: 
