@@ -4,9 +4,9 @@ import FormView from './Form';
 import io from 'socket.io-client';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import * as userActions from '../actions/UserActions';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-//const socket = io('http://localhost');
+const socket = io('http://localhost:3000');
 
 class Title extends React.Component {
   state = {
@@ -20,7 +20,12 @@ class Title extends React.Component {
   }
 
   handleClose = () => {
-  	console.log(this.refs.nameForm.value)
+  	const name = {
+  		name: this.refs.nameForm.value
+  	};
+  	socket.on('group', () => {
+  		socket.emit('newuser', name);
+  	});
   	this.props.actions.setName(this.refs.nameForm.value);
   	this.setState({
   		isShowingModal: false
