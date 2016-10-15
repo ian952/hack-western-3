@@ -4,9 +4,13 @@ export function userJoin() {
 	return { type: USER_JOIN, response: 'Bob' }
 }
 
-export function setName(name) {
+export function setName(name, userID) {
 	return { 
 		type: SET_NAME,
-		response: name
+		response: {name: name, id: userID}
 	}
+}
+
+export function makeRoom() {
+	
 }

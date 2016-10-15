@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import { USER_JOIN, SET_NAME } from '../constants/ActionTypes.js';
 
 const initialState = Immutable.fromJS({
-	name: '',
+	user: {},
 	userList: []
 });
 
@@ -12,7 +12,7 @@ export default function AppState(state = initialState, action) {
 	switch (action.type) {
 
 	case SET_NAME:
-		newState = state.set('name', action.response);
+		newState = state.set('user', Immutable.fromJS(action.response));
 		return newState;
 
 	case USER_JOIN: 

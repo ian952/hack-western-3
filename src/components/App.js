@@ -30,9 +30,14 @@ class Title extends React.Component {
   	const name = {
   		name: this.refs.nameForm.value
   	};
-  	socket.emit('newuser', name);
-    this.props.actions.setName(this.refs.nameForm.value);
+  	socket.emit('newuser', name, (userID) => {
+  		this.props.actions.setName(this.refs.nameForm.value, userID);
+  	});
     this.handleClose();
+  }
+
+  makeRoom = () => {
+  	this.props.actions.makeRoom();
   }
 
   render() {
@@ -56,8 +61,8 @@ class Title extends React.Component {
 	            <div style={{ margin: '300 0 0 0'}}>
 	              <div className='row'>
 	                <div className='col-md-3 col-md-offset-4 col-sm-2 col-sm-offset-4'>
-	       				   <button className={cx('roombtn','btn btn-lg', 'btn-brown')}>
-
+	       				   <button className={cx('roombtn','btn btn-lg', 'btn-brown')}
+	       				   				 onClick={this.makeRoom}>
 	       					    Host 
 	       				   </button>
 	                </div>
