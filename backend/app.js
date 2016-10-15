@@ -38,16 +38,9 @@ io.on ('connection', function(socket){
 	socket.on ('join', function(data){
 		console.log ('Join room');
 
-		var p = new Promise (
-			function (resolve) {
-				resolve (databaseService.joinGroup(data.person_ID, data.group_ID));
-			});
-		p.then (function (){
-			var pp = new Promise (function(resolve){
-					resolve (databaseService.joinGroup(data.person_ID, data.group_ID));
-			});
-			pp.then (function() {
-				io.emit('person_list', databaseService.getPersonsInGroup(data.group_ID));
+		databaseService.joinGroup(data.person_ID, data.group_ID).then (() => {
+			databaseService.getPersonsInGroup(data.group_ID).then ((person_list) => {
+				io.emit('person_list', person_list);
 			});
 		});
 	});
