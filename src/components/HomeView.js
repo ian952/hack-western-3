@@ -29,7 +29,7 @@ class HomeView extends React.Component {
   makeRoom = () => {
   	const userID = this.props.userStore.getIn(['user', 'id']);
   	const data = {
-  		user_ID: userID
+  		person_ID: userID
   	};
   	this.props.socket.emit('create', data, (roomID) => {
   		this.props.actions.makeLead();
@@ -41,7 +41,7 @@ class HomeView extends React.Component {
   	const userID = this.props.userStore.getIn(['user', 'id']);
   	const roomID = this.refs.roomForm.value;
   	const data = {
-  		user_ID: userID,
+  		person_ID: userID,
   		group_ID: roomID
   	};
   	this.props.socket.emit('join', data, () => {
