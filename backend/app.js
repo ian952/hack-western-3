@@ -17,11 +17,14 @@ app.get ('/', function(req, res) {
 
 io.on ('connection', function(socket){
 	console.log ('connected');
-	socket.emit ('Hey');
+
 	socket.on ('newuser', function(data){
 		console.log (data.name + ' connected');
 
-		var p = new Promise (resolve(databaseService.createPerson(data.name)))
+		var p = new Promise (
+			function (resolve, reject) {
+				resolve(databaseService.createPerson(data.name))
+		})
 		p.then (
 			function (id) {
 				socket.set('person_ID', id);
