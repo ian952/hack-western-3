@@ -9,21 +9,14 @@ class RoomView extends React.Component {
   }
 
 	render() {
+		const roomNum = this.props.pageStore.get('roomID');
 		return (
-		{
-			this.state.userList.map((name) =>
-				return (
-					<h3> Name </h3>
-				);
-			)
-		});
+			<div>
+				<h3> You are in room {this.props.pageStore.roomID} </h3>
+			</div>
+		);
 	}
 }
 
-function mapStateToProps(state) {
-  return {
-      userList: state.get('userList');
-  }
-}
 
-export default connect(mapStateToProps)(RoomView)
+export default RoomView;

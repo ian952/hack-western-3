@@ -17,7 +17,7 @@ app.get ('/', function(req, res) {
 	res.send('<html><body>Hi</body></html>');
 });
 
-yelpService.search ('University of Western Ontario', '40000')
+//yelpService.search ('University of Western Ontario', '40000')
 	
 
 io.on ('connection', function(socket){
