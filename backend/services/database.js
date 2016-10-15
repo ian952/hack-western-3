@@ -17,7 +17,7 @@ function createPerson (name) {
 			}
 
 			//console.log (result);	
-			//console.log (result.rows[0].Person_ID);
+			console.log (result.rows[0].Person_ID);
 			return result.rows[0].Person_ID;
 		});
 	});

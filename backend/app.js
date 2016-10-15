@@ -6,6 +6,7 @@ var io = require ('socket.io')(http);
 //services
 var databaseService = require ('./services/database.js');
 
+var activeGroups = [];
 
 http.listen(3000);
 
@@ -27,6 +28,7 @@ io.on ('connection', function(socket){
 		})
 		p.then (
 			function (id) {
+				console.log ('ID: ' + id);
 				socket.set('person_ID',{person_ID: id});
 				io.emit (id);
 			}
@@ -58,7 +60,7 @@ io.on ('connection', function(socket){
 	});
 
 	socket.on('start',function(data){
-		
+
 	});
 
 });
