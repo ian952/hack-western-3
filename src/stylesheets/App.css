@@ -1,3 +1,14 @@
 .header {
 	text-align: center;
+	font-size: 100px;
+	font-color: white;
 }
+
+
+.alignedcenter {
+	text-align: center;
+}
+
+.rollovericons a{
+  margin: 10px;
+  }
