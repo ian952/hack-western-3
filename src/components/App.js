@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import HomeView from './HomeView';
 import RoomView from './RoomView';
 import FormView from './Form';
+import DistanceView from './DistanceView';
 import * as pages from '../constants/PageTypes';
 const socket = io('http://localhost:3000');
 

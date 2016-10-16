@@ -53,7 +53,6 @@ class HomeView extends React.Component {
 
   render() {
   	return(
-	  	<div className='potato'>
 	  	<div>
 	  	  {
 	      	this.state.isShowingModal &&
