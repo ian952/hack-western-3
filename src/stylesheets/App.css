@@ -12,6 +12,13 @@
 	font-family: 'rubik';
 }
 
+.smallheader {
+	font-size: 40px;
+	color: #3c0101 !important;
+	font-family: 'Rubik';
+	border-bottom: solid;
+}
+
 .infotext{
 	text-align: center;
 	margin-top: 20px;

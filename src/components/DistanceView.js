@@ -15,15 +15,19 @@ class DistanceView extends React.Component {
     };
   }
 
-    render() {
+  render() {
   	return(
+      <div className='container'>
+      	<h1 className= 'smallheader' style={{ margin:'60 0 0 20'}}>
+      		Distance
+      	</h1>
+        <form>
+          <input type="text" />
+        </form>
+      </div>
 
-<div className='container'> 
-	<h1 style={{ margin:'40 0 0 0'}}>
-		Distance
-	</h1>
-</div>
-);
-}
+    );
+  }
 } 
 
+export default DistanceView;

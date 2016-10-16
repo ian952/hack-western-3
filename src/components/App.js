@@ -88,7 +88,7 @@ class Title extends React.Component {
             </ModalDialog>
 	        </ModalContainer>
       	}
-        {this.routePage()}
+        <DistanceView />
 		    </div>
     );
   };
