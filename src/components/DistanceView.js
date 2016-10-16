@@ -30,6 +30,7 @@ class DistanceView extends React.Component {
       radius: this.state.radius
     }
     this.props.socket.emit('start', data, (question) => {
+      console.log(question);
       this.props.actions.startVote(question);
     });
   }

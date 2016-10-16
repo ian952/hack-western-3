@@ -8,5 +8,5 @@ export function setLoc() {
 	return { type: GET_LOC };
 }
 export function startVote(question) {
-	return { type: START_VOTE };
+	return { type: START_VOTE, response: question };
 }

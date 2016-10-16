@@ -9,7 +9,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import HomeView from './HomeView';
 import RoomView from './RoomView';
-import FormView from './Form';
 import DistanceView from './DistanceView';
 import QuestionView from './QuestionView';
 import FinalView from './FinalView';
@@ -74,6 +73,7 @@ class Title extends React.Component {
                   socket={socket}
                   pageStore={this.props.pageStore}
                   userStore={this.props.userStore}
+                  questionStore={this.props.questionStore}
                   actions={this.props.actions}
                 />
 
