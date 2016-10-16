@@ -194,7 +194,7 @@ io.on ('connection', function(socket){
 
 	socket.on('answer', function(data, dataCallback) {
 		//console.log (data);
-		console.log ('answer');
+		//console.log ('answer');
 		var selected_group = activeGroups.find((group) => group.group_ID == data.group_ID)
 		var selected_person = selected_group.persons.find((person) => person.person_ID == data.person_ID);
 
@@ -204,11 +204,11 @@ io.on ('connection', function(socket){
 			selected_person.answers.push(data.answer);
 		}
 
-		console.log (selected_person);
-		console.log ('length: ' + selected_person.answers.length);
+		//console.log (selected_person);
+		//console.log ('length: ' + selected_person.answers.length);
 
 		if (selected_group.persons.find ((person) => person.answers.length < selected_group.current_question) == undefined) {
-			console.log ('incremet Q!');
+			//console.log ('incremet Q!');
 			selected_group.current_question ++;
 			yelpService.genQuestion(selected_group.current_question, selected_group).then ((question) => {
 				if (question.done) {
@@ -220,7 +220,7 @@ io.on ('connection', function(socket){
 				dataCallback(question);
 			});
 		} else {
-			console.log ('update');
+			//console.log ('update');
 			var peoples_answers = [];
 			selected_group.persons.map ((person) => {
 				if (person.answers.length == selected_group.current_question) {
