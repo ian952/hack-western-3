@@ -99,7 +99,7 @@ class HomeView extends React.Component {
 	            <div className='row'>
 	              <div className='col-md-3 col-md-offset-4 col-sm-2 col-sm-offset-4'>
 	     				   <button className={cx('roombtn', 'btn btn-lg', 'btn-grey')}
-	     				   				 onClick={this.handleClick}> 
+	     				   			onClick={this.handleClick}> 
 	                    Join 
 	     				   </button>
 	              </div>

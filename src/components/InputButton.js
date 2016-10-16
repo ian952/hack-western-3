@@ -33,7 +33,7 @@ class InputButton extends React.Component {
 					</button>
 				</div>
 				<div className='col-md-10'>
-				  <Line key={this.props.name} percent={fillPercent} strokeWidth="2" trailWidth="2" strokeColor="#b02336" />
+				  <Line percent={fillPercent} strokeWidth="2" trailWidth="2" strokeColor="#b02336" />
 				</div>
 			</div>
 		);

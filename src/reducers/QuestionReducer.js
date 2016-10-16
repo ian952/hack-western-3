@@ -31,22 +31,18 @@ export default function QuestionStore(state = initialState, action) {
 			return newState;
 
 		case UPDATE_VOTES:
-			 console.log(newState.get('currAnswers'));
-			 action.response.map((answer) => {
+			 action.response.map((answerObj) => {
 			 	newState = newState.update('currAnswers', (answerList, i) => {
 			 		let found = false;
 			 		if (state.get('qnumber') < 5) {
-			 			state.get('answers').map((answerObj, i) => {
-			 				if (answerObj === answer) {
+			 			state.get('answers').map((answer, i) => {
+			 				if (answer === answerObj.answer) {
 			 					found = true;
 			 					index = i;
 			 				}
 			 			});
-			 			console.log(index);
 			 		}
 			 		if (found) {
-			 			console.log('in here')
-			 			console.log(answerList.set(index, answerList.get(index) + 1).toJS())
 			 			return answerList.set(index, answerList.get(index) + 1);
 			 		}
 			 		return answerList;

@@ -10,8 +10,9 @@ class QuestionView extends React.Component {
 		this.props.socket.on('question', (question) => {
 	    if (this.props.questionStore.get('qnumber') < 11) {
     		this.props.actions.startVote(question);
+    	} else {
+    		this.props.actions.showResult(question.answers[0]);
     	}
-    	this.props.actions.showResult(question.answers[0]);
     });
     this.props.socket.on('submittedanswers', (answerList) => {
     	this.props.actions.updateVotes(answerList);
@@ -24,7 +25,7 @@ class QuestionView extends React.Component {
 
 	displayAnswers() {
 		return this.props.questionStore.get('answers').map((answer, i) => {
-			if (this.props.questionStore.get('qnumber') < 5) {
+			if (this.props.questionStore.get('qnumber') < 6) {
 				return (
 					<InputButton
 						key={answer + i}
