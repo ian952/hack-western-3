@@ -9,5 +9,5 @@ export function updateVotes(answerList) {
 }
 
 export function showResult(finalAnswer) {
-	return { type: SHOW_RESULT response: finalAnswer};
+	return { type: SHOW_RESULT, response: finalAnswer};
 }
