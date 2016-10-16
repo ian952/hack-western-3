@@ -324,7 +324,7 @@ function genQuestion (num, selected_group) {
 			resolve ({
 				done: true,
 				question: 'Done',
-				answers: [getMajorityRes (11,selected_group)]
+				answers: [getMajorityRes (10,selected_group)]
 			});
 		}
 	});
