@@ -8,3 +8,4 @@ export const GET_LOC = 'GET_LOC';
 export const GET_RESULTS = 'GET_RESULTS';
 
 export const FINISHED_QUESTION = 'FINISHED_QUESTION';
+export const UPDATE_VOTES = 'UPDATE_VOTES';

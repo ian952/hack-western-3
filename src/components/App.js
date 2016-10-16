@@ -16,7 +16,7 @@ import FinalView from './FinalView';
 import * as pages from '../constants/PageTypes';
 const socket = io('http://localhost:3000');//io('http://choosechews.herokuapp.com');
 
-class Title extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -133,4 +133,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Title)
+)(App)

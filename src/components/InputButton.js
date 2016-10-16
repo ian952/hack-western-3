@@ -21,6 +21,10 @@ class InputButton extends React.Component {
   }
 
 	render() {
+		const size = this.props.userStore.get('userList').size - 1;
+		const numerator = this.props.questionStore.getIn(['currAnswers', this.props.index]);
+		const fillPercent = (size > 0 && numerator) ? (numerator/size*100).toString() : 0 ;
+		console.log(fillPercent);
 		return (
 			<div className={cx('row', 'button')}>
 				<div className='col-md-2'>
@@ -29,7 +33,7 @@ class InputButton extends React.Component {
 					</button>
 				</div>
 				<div className='col-md-10'>
-				  <Line percent="10" strokeWidth="2" trailWidth="2" strokeColor="#b02336" />
+				  <Line key={this.props.name} percent={fillPercent} strokeWidth="2" trailWidth="2" strokeColor="#b02336" />
 				</div>
 			</div>
 		);

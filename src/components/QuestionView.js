@@ -2,6 +2,7 @@ import React from 'react';
 import '../stylesheets/QuestionView.scss';
 import cx from 'classnames';    
 import InputButton from './InputButton';
+import InputCard from './InputCard';
 
 class QuestionView extends React.Component {
 
@@ -10,7 +11,9 @@ class QuestionView extends React.Component {
       console.log(question);
       this.props.actions.startVote(question);
     });
-    this.props.socket.on('submitted')
+    this.props.socket.on('submittedanswers', (answerList) => {
+    	this.props.actions.updateVotes(answerList);
+    });
 	}
 
 	displayQuestion() {
@@ -19,15 +22,34 @@ class QuestionView extends React.Component {
 
 	displayAnswers() {
 		return this.props.questionStore.get('answers').map((answer, i) => {
-			return (
-					<InputButton
-						key={answer + i}
-						name={answer}
+			if (this.props.questionStore.get('qnumber') < 5) {
+				return (
+						<InputButton
+							key={answer + i}
+							index={i}
+							name={answer}
+							userStore={this.props.userStore}
+							pageStore={this.props.pageStore}
+							questionStore={this.props.questionStore}
+							socket={this.props.socket}
+							actions={this.props.actions} />
+				);
+			} else {
+				return (
+					<InputCard
+						key={answer.get('name') + i}
+						index={i}
+						name={answer.get('name')}
 						userStore={this.props.userStore}
 						pageStore={this.props.pageStore}
+						questionStore={this.props.questionStore}
 						socket={this.props.socket}
-						actions={this.props.actions} />
-			);
+						actions={this.props.actions}
+						rating={answer.get('rating_img_url')}
+						image={answer.get('img_url')}
+						categories={answer.get('categories')} />
+				)
+			}
 		});
 	}
 
