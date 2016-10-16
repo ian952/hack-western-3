@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 
 class HomeView extends React.Component {
+	
 	constructor(props) {
     super(props);
     this.state = {

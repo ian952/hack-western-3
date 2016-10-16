@@ -42,7 +42,7 @@ io.on ('connection', function(socket){
 		})
 	});
 
-	socket.on ('join', function(data, returnData){
+	socket.on('join', function(data, returnData){
 		console.log ('Join room');
 		console.log (data);
 		databaseService.joinGroup(data.person_ID, data.group_ID).then (() => {
