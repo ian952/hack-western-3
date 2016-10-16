@@ -1,3 +1,18 @@
 .card {
-	border: 1px solid #3c0101;
+	border: 1px solid grey;
+	cursor: pointer;
+	height: 250px;
+}
+
+.card:hover {
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+	background-color: #FD8D56;
+}
+
+.title {
+	border-bottom: 1px solid #AAAF9F;
+	margin-bottom: 25px;
 }

@@ -24,19 +24,19 @@ class InputCard extends React.Component {
 
 	render() {
 		return (
-			<div className='container card' onClick={this.handleClick}>
-				<div className='col-md-5'>
-					<h3>{this.props.name}</h3>
+			<div className='container card col-md-6' onClick={this.handleClick}>
+				<div className='col-md-12'>
+					<h3 className = 'title'>{this.props.name}</h3>
 				</div>
-				<div className='col-md-3'>
-					<img src={this.props.rating} />
-				</div>
-				<div className='row'>
-					<div className='col-md-6'>
+				<div className='col-md-6'>
+					<div className='col-md-12'>
 						<img src={this.props.image} />
 					</div>
+					<div className='col-md-12'>
+						<img src={this.props.rating} />
+					</div>
 				</div>
-				<ul className='list-group'>
+				<ul className='list-group col-md-6'>
 					{this.props.categories.map((categoryName, i) => 
 						<li key={categoryName + i}
 								className='list-group-item'>

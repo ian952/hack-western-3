@@ -274,7 +274,8 @@ function genQuestion (num, selected_group) {
 						rating_img_url: business.rating_img_url,
 						name: business.name,
 						categories:temp_categories,
-						img_url: business.image_url
+						img_url: business.image_url,
+						yelp_url: business.url
 					});
 
 				});
