@@ -180,6 +180,7 @@ io.on ('connection', function(socket){
 			selected_person.answers.push(data.answer);
 		}
 
+
 		if (selected_group.persons.find ((person) => person.answers.length < selected_group.current_question) == undefined) {
 			selected_group.current_question ++;
 
@@ -189,6 +190,18 @@ io.on ('connection', function(socket){
 				}
 				socket.broadcast.to(data.group_ID).emit('question',question);
 			});
+		} else {
+			var peoples_answers = [];
+			selected_group.persons.map ((person) => {
+				if (person.answers.length == selected_group.current_question) {
+					peoples_answers.push ({
+						person_ID: person.person_ID,
+						answer: person.answers[selected_group.current_question-1]
+					});
+				}
+			});
+
+			socket.broadcast.to(data.group_ID).emit('submittedanswers', peoples_answers);
 		}
 
 	});
