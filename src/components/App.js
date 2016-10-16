@@ -77,7 +77,7 @@ class App extends React.Component {
                   questionStore={this.props.questionStore}
                   actions={this.props.actions}/>
 
-      case pages.RESULT:
+      case pages.RESULTS:
         return <FinalView
                   pageStore={this.props.pageStore}
                   userStore={this.props.userStore}
