@@ -38,6 +38,7 @@ class QuestionView extends React.Component {
 				return (
 					<InputCard
 						key={answer.get('name') + i}
+						answer={answer}
 						index={i}
 						name={answer.get('name')}
 						userStore={this.props.userStore}

@@ -8,11 +8,12 @@ class InputCard extends React.Component {
 		const data = {
 			group_ID: this.props.pageStore.get('roomID'),
 			person_ID: this.props.userStore.getIn(['user', 'id']),
-			answer: this.props.name
+			answer: this.props.answer.toJS()
 		}
     this.props.socket.emit('answer', data, (nextQuestion) => {
     	if (nextQuestion) {
     		//last one to emit response
+
     		this.props.actions.startVote(nextQuestion);
     	}
     	this.props.actions.finishedQuestion();
