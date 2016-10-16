@@ -15,7 +15,7 @@ Array.prototype.remove = function(from, to) {
   return this.push.apply(this, rest);
 };
 
-http.listen(3000);
+http.listen(process.env.PORT || 3000);
 
 console.log ('Listening on 3000');
 
