@@ -4,13 +4,26 @@
 	text-align: center;
 	font-size: 100px;
 	color: #3c0101 !important;
+	font-family: 'Rubik';
+	border-bottom: solid;
+}
+
+.rubik {
+	font-family: 'rubik';
 }
 
 .infotext{
 	text-align: center;
 	margin-top: 20px;
-	font-size: 50px;
-	font-family: monospace;
+	font-size: 45px;
+	font-family: 'roboto';
+}
+
+.infotext2{
+	text-align: center;
+	margin-top: 20px;
+	font-size: 40px;
+	font-family: 'roboto';
 }
 
 .buttontext {
@@ -21,29 +34,47 @@
        position: fixed;     
        text-align: left;    
        bottom: 0px;
-       font-size: 20px;
+       font-size: 16px;
        margin-left: 10px;
        margin-bottom: 10px;
+       font-family: 'roboto';
 }  
 
+/* pop up */
+
+.popupsize {
+	width: 175px;
+	height: 125px;
+}
+
+/* body/background */
+
+.potato {
+  background: url('/images/potato.jpg') !important;
+}
+
+.docenter {
+	text-align: center;
+}
 
 
 /* buttons */
 
 .roombtn {	
 	border: 0 none;
-	text-transform: uppercase;
 	margin-top: 20px;
 	display: inline;
-	text-align: center;
-	font-size: 50px;
-	width: 300px;
-}
-.roombtn:focus, .roombtn:active:focus, {
-	outline: 5px none;
+	height: 100px;
+	width: 250px;
+	font-family: 'Rubik';
+	font-size: 150px;
 }
 .roombtn-lg {
-	padding: 20px 40px;
+	padding: 40px 60px;
+}
+
+.roombtn:focus, .roombtn:active:focus, {
+	outline: 5px none;
 }
 .btn-brown{
 	background-color: #b02336 !important;

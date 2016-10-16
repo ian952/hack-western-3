@@ -6,6 +6,7 @@ import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
+
 class HomeView extends React.Component {
 	constructor(props) {
     super(props);
@@ -49,8 +50,22 @@ class HomeView extends React.Component {
   	});
   }
 
+  joinRoom = () => {
+  	const userID = this.props.userStore.getIn(['user', 'id']);
+  	const roomID = this.refs.roomForm.value;
+  	const data = {
+  		person_ID: userID,
+  		group_ID: roomID
+  	};
+  	this.props.socket.emit('join', data, () => {
+  		console.log('im out');
+  		this.props.actions.joinRoom(roomID);
+  	});
+  }
+
   render() {
   	return(
+	  	<div className='potato'>
 	  	<div>
 	  	  {
 	      	this.state.isShowingModal &&
@@ -64,10 +79,10 @@ class HomeView extends React.Component {
       	}
 		  	<div className='container'>
 		    	<div className={cx('window-size', 'clearfix')}>
-		        <h1 className='header'>
+		        <h1 className='header' style={{ margin: '80 0 0 0'}}>
 		        	Choose Chews
 		        </h1>
-		        <div className='infotext row'>
+		        <div className='infotext row' style={{ margin: '40 0 0 0'}}>
 		          <p1> 
 		            Can't agree on where to eat? 
 		          </p1>
@@ -101,6 +116,7 @@ class HomeView extends React.Component {
 	        Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
 	      </div>
 	    </div>
+	   </div>
 	  );
   }
 }

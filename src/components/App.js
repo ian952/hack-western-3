@@ -65,10 +65,18 @@ class Title extends React.Component {
 	      	this.state.isShowingModal &&
 	        <ModalContainer onClose={this.handleClose}>
 	          <ModalDialog onClose={this.handleClose}>
-	            <h3>Enter your name:</h3>
-	            <input ref='nameForm'/>
-	            <button className='btn btn-danger' onClick={this.submitName}> Enter </button>
-	          </ModalDialog>
+              <div className='popupsize' style={{ zoom: '175%'}}>
+                <div className='row'>
+  	             <h3 className='rubik docenter'>Enter Your Name</h3>
+                </div>
+                <div className='row docenter'>
+  	             <input ref='nameForm'/>
+                </div>
+                <div className='row docenter' style={{ margin: '15 0 0 0'}}>
+  	             <button className='btn btn-danger rubik' onClick={this.submitName}> Enter </button>
+	              </div>
+              </div>
+            </ModalDialog>
 	        </ModalContainer>
       	}
         {this.routePage()}
