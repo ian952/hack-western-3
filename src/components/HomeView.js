@@ -111,7 +111,6 @@ class HomeView extends React.Component {
 	        Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
 	      </div>
 	    </div>
-	   </div>
 	  );
   }
 }
