@@ -17,7 +17,7 @@ function createPerson (name) {
 				}
 
 				//console.log (result);	
-				console.log (result.rows[0].Person_ID);
+				//console.log (result.rows[0].Person_ID);
 				resolve(result.rows[0].Person_ID);
 			});
 		});
@@ -58,8 +58,8 @@ function joinGroup (person_ID, group_ID) {
 		  	reject(err);
 		  }
 		  //console.log('Connected to postgres! Getting schemas...');
-		  console.log (person_ID);
-		  console.log (group_ID);
+		  // console.log (person_ID);
+		  // console.log (group_ID);
 
 			client.query('UPDATE "PERSONS" SET "Group_ID" = $1 WHERE "Person_ID" = $2',[group_ID, person_ID], function (err, result) {
 				if (err) {
