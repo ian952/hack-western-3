@@ -53,9 +53,7 @@ class HomeView extends React.Component {
 
   render() {
   	return(
-<<<<<<< HEAD
 	  	<div className='potato'>
-=======
 	  	<div>
 	  	  {
 	      	this.state.isShowingModal &&
@@ -67,7 +65,6 @@ class HomeView extends React.Component {
 	          </ModalDialog>
 	        </ModalContainer>
       	}
->>>>>>> master
 		  	<div className='container'>
 		    	<div className={cx('window-size', 'clearfix')}>
 		        <h1 className='header' style={{ margin: '80 0 0 0'}}>
@@ -107,6 +104,7 @@ class HomeView extends React.Component {
 	        Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
 	      </div>
 	    </div>
+	   </div>
 	  );
   }
 }
