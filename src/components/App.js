@@ -13,7 +13,7 @@ import DistanceView from './DistanceView';
 import QuestionView from './QuestionView';
 import FinalView from './FinalView';
 import * as pages from '../constants/PageTypes';
-const socket = io('http://localhost:3000');
+const socket = io('http://choosechews.herokuapp.com');
 
 class Title extends React.Component {
   constructor(props) {
