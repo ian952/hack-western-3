@@ -17,7 +17,7 @@ export default function UserStore(state = initialState, action) {
 		return newState;
 
 	case USER_JOIN: 
-		newState = state.updateIn('userList', (userList) => userList.push(action.response));
+		newState = state.set('userList', Immutable.fromJS(action.response));
 		return newState;
 
 	case JOIN_ROOM:
@@ -28,7 +28,7 @@ export default function UserStore(state = initialState, action) {
 
 	case MAKE_LEAD:
 		newState = state.set('host', true)
-		newState = newState.setIn(['userList'], (userList) => userList.push(state.get('user')));
+		newState = newState.update('userList', (userList) => userList.push(state.get('user')));
 		return newState;
 
 

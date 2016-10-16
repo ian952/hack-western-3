@@ -44,13 +44,13 @@ io.on ('connection', function(socket){
 		})
 	});
 
-	socket.on ('join', function(data, returnData){
+	socket.on('join', function(data, returnData){
 		console.log ('Join room');
 		console.log (data);
 		databaseService.joinGroup(data.person_ID, data.group_ID).then (() => {
 			databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
 				socket.join(data.group_ID);
-				socket.broadcast.to(data.group_ID).emit('person_list', person_list);å
+				socket.broadcast.to(data.group_ID).emit('person_list', person_list);
 				returnData(person_list);
 			});
 		});

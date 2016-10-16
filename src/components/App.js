@@ -47,10 +47,18 @@ class Title extends React.Component {
     switch(this.props.pageStore.get('currPage')) {
 
       case pages.HOME:
-        return <HomeView socket={socket} userStore={this.props.userStore} actions={this.props.actions}/>
+        return <HomeView 
+                  socket={socket} 
+                  userStore={this.props.userStore}
+                  actions={this.props.actions} />
 
       case pages.ROOM:
-        return <RoomView socket={socket} pageStore={this.props.pageStore} userStore={this.props.userStore}/>
+        return <RoomView 
+                  socket={socket}
+                  pageStore={this.props.pageStore}
+                  userStore={this.props.userStore}
+                  actions={this.props.actions}
+                />
 
       default:
         return null;
