@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/InputButton.scss';
+import '../stylesheets/InputCard.scss';
 import cx from 'classnames';
 
 class InputCard extends React.Component {
@@ -24,9 +24,9 @@ class InputCard extends React.Component {
 
 	render() {
 		return (
-			<div className='container'>
+			<div className='container card' onClick={this.handleClick}>
 				<div className='col-md-5'>
-					<h3 onClick={this.handleClick}>{this.props.name}</h3>
+					<h3>{this.props.name}</h3>
 				</div>
 				<div className='col-md-3'>
 					<img src={this.props.rating} />
@@ -34,11 +34,6 @@ class InputCard extends React.Component {
 				<div className='row'>
 					<div className='col-md-6'>
 						<img src={this.props.image} />
-					</div>
-					<div className='col-md-6'>
-						<button className='btn-brown'>
-							Select Restaurant
-						</button>
 					</div>
 				</div>
 				<ul className='list-group'>
