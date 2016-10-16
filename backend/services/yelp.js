@@ -19,7 +19,7 @@ var yelp = new Yelp({
   token_secret: process.env.TOKEN_SECRET
 });
 
-function randBool () {Math.random() < 0.5};
+function randBool () {return Math.random() < 0.5};
 
 function setup (loc, rad) {
 	return new Promise ((resolve, reject) => {
@@ -30,8 +30,10 @@ function setup (loc, rad) {
 }
 
 function search (filter) {
+	if (filter == '') 
+		filter = 'restaurants';
 	return yelp.search ({
-		category_filter: 'restaurants' + filter,
+		category_filter: filter,
 		location: location,
 		radius_filter: radius,
 		sort: sortAns
@@ -140,7 +142,6 @@ function genQuestion (num, selected_group) {
 							question: 'Pick one:',
 							answers: popularCategories
 						};
-						console.log ('Q2: ' + res);
 						resolve (res);
 					});
 				} else if (num == 4) {
@@ -164,7 +165,6 @@ function genQuestion (num, selected_group) {
 						question: 'Pick your own category:',
 						answers: categories
 					};
-					console.log ('Q4: ' + res);
 					resolve (res);
 				}
 			});
@@ -185,22 +185,23 @@ function genQuestion (num, selected_group) {
 
 			var picked = [];
 
-			
+			while (picked.length < 5) {
+				//console.log (picked);
+				if (randBool()) {
+					recommanded.reverse();
+				} 
 
-			if (randBool()) {
-				recommanded.reverse();
-			} 
+				recommanded.map((item) => {
+					allCategories[item[0]] = {
+						filter_name: item[1],
+						count: 0
+					};
 
-			recommanded.map((item) => {
-				allCategories[item[0]] = {
-					filter_name: item[1],
-					count: 0
-				};
-
-				if (picked.length < 5 && randBool()) {
-					picked.append(item[0]);
-				}
-			});
+					if (picked.length < 5 && randBool()) {
+						picked.push(item[0]);
+					}
+				});
+			}
 
 			var res = {
 				done: false,
@@ -208,11 +209,11 @@ function genQuestion (num, selected_group) {
 				answers: picked
 			};
 
-			console.log ('Q3: ' + res);
 
 			resolve (res);
 
 		} else if (num == 5) {
+			//console.log (allCategories);
 			selected_group.persons.map ((person) => {
 				person.answers.map ((answer,i) => {
 					if (i == 1 || i == 2 || i == 3) {
@@ -221,29 +222,42 @@ function genQuestion (num, selected_group) {
 				});
 			});
 
-			allCategories.filter ((category) => {
-				category.count > 0;
-			});
+			for (var key in allCategories) {
+				if (allCategories[key].count == 0) {
+					delete allCategories[key];
+				}
+			}
+
+			//console.log (allCategories);
 
 			var sortable = [];
-			for (var cat in allCategories)
+			for (var cat in allCategories) {
+				if (cat != 'remove') {
 			      sortable.push([cat, allCategories[cat]]);
+				}
+			  }
 			sortable.sort(
 			    function(a, b) {
-			        return b.count - a.count;
+			        return b[1].count - a[1].count;
 			    }
 			);
 
 			var filter = '';
+			//console.log (sortable);
 
 			//possibly want to randomize the order if they are all the same
 
-			for (var i = 0; i < 8 ; i++) {
-				filter += ',' + sortable[i][1].filter_name;
+			for (var i = 0; i < sortable.length ; i++) {
+				if (i != 0) 
+					filter += ',';
+				filter += sortable[i][1].filter_name;
 			}
+
+			//console.log (filter);
 
 			search(filter).then((data) => {
 				finalRestaurants = data.businesses;
+				//console.log (data);
 
 				resolve ({
 					done: false,
@@ -289,6 +303,7 @@ module.exports = (function() {
 	return {
 		search: search,
 		popularCategory: popularCategory,
-		genQuestion: genQuestion
+		genQuestion: genQuestion,
+		setup: setup
 	}
 })();
