@@ -14,8 +14,10 @@ class InputCard extends React.Component {
     this.props.socket.emit('answer', data, (nextQuestion) => {
     	if (nextQuestion) {
     		//last one to emit response
-    		if (this.props.questionStore.get('qnumber') < 12) {
-    			  this.props.actions.startVote(nextQuestion);
+    		if (this.props.questionStore.get('qnumber') < 11) {
+    			this.props.actions.startVote(nextQuestion);
+    		} else {
+    			this.props.actions.showResult(nextQuestion.answers[0]);
     		}
     	}
     	this.props.actions.finishedQuestion();

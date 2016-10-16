@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { START_VOTE, FINISHED_QUESTION, UPDATE_VOTES } from '../constants/ActionTypes.js';
+import { START_VOTE, FINISHED_QUESTION, UPDATE_VOTES, SHOW_RESULT } from '../constants/ActionTypes.js';
 
 const initialState = Immutable.fromJS({
 	optionArray: [],
@@ -7,7 +7,8 @@ const initialState = Immutable.fromJS({
 	answers: [],
 	currAnswers: [],
 	done: false,
-	qnumber: 0
+	qnumber: 0,
+	result: {}
 })
 
 
@@ -48,6 +49,10 @@ export default function QuestionStore(state = initialState, action) {
 			 		return answerList.get(index);
 			 	})
 			 });
+			return newState;
+
+		case SHOW_RESULT:
+			newState = state.set('result', Immutable.fromJS(action.response));
 			return newState;
 		
 		default:

@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import * as pages from '../constants/PageTypes';
-import { JOIN_ROOM, START_VOTE, GET_RESULTS, GET_LOC } from '../constants/ActionTypes';
+import { JOIN_ROOM, START_VOTE, GET_RESULTS, GET_LOC, SHOW_RESULT } from '../constants/ActionTypes';
 const initialState = Immutable.fromJS({
 	currPage: pages.HOME,
 	roomID: 0
@@ -24,7 +24,7 @@ export default function UserStore(state = initialState, action) {
 		newState = state.set('currPage', pages.VOTE);
 		return newState;
 
-	case GET_RESULTS:
+	case SHOW_RESULT:
 		newState = state.set('currPage', pages.RESULTS);
 		return newState;
 

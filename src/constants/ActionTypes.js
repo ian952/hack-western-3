@@ -9,3 +9,4 @@ export const GET_RESULTS = 'GET_RESULTS';
 
 export const FINISHED_QUESTION = 'FINISHED_QUESTION';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
+export const SHOW_RESULT = 'SHOW_RESULT';
