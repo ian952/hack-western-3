@@ -135,7 +135,7 @@ function genQuestion (num, selected_group) {
 			}
 
 			search ('').then((data) => {
-				console.log (data);
+				//console.log (data);
 				if (num == 2) {
 					popularCategory (data).then((popularCategories) => {
 						var res = {
@@ -143,7 +143,7 @@ function genQuestion (num, selected_group) {
 							question: 'Pick one:',
 							answers: popularCategories
 						};
-						console.log (res);
+						//console.log (res);
 						resolve (res);
 					});
 				} else if (num == 4) {
@@ -230,7 +230,8 @@ function genQuestion (num, selected_group) {
 				}
 			}
 
-			//console.log (allCategories);
+			console.log ('Categories:');
+			console.log (allCategories);
 
 			var sortable = [];
 			for (var cat in allCategories) {
@@ -257,7 +258,9 @@ function genQuestion (num, selected_group) {
 
 			//console.log (filter);
 
+			console.log ('start search');
 			search(filter).then((data) => {
+				console.log ('search done');
 				//finalRestaurants = data.businesses;
 
 				data.businesses.map((business) => {
@@ -277,7 +280,8 @@ function genQuestion (num, selected_group) {
 				});
 
 				//console.log (data);
-				//console.log (finalRestaurants);
+				console.log ('final restaurants');
+				console.log (finalRestaurants);
 
 				resolve ({
 					done: false,
@@ -286,14 +290,14 @@ function genQuestion (num, selected_group) {
 				});
 			});
 
-		} else if (num == 6 && num == 7 && num == 8) {
+		} else if (num == 6 || num == 7 || num == 8) {
 			var index = (num-5) * 2;
 			resolve ({
 				done: false,
 				question: 'Pick One:',
 				answers: [finalRestaurants[index], finalRestaurants[index+1]]
 			});
-		} else if (num == 9 && num == 10) {
+		} else if (num == 9 || num == 10) {
 			var index = (num - 9) * 2 + 5;
 
 			resolve ({
