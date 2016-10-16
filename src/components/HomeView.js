@@ -65,7 +65,7 @@ class HomeView extends React.Component {
 
   render() {
   	return(
-	  	<div className='potato'>
+	  	<body className='potato'>
 	  	<div>
 	  	  {
 	      	this.state.isShowingModal &&
@@ -89,7 +89,7 @@ class HomeView extends React.Component {
 		        </div> 
 		        <div className='infotext row'>
 		          <p2>
-		            Join a friend's group or create your own, and get choosing.
+		            Join a friend's group or host your own, and get choosing.
 		          </p2>
 		        </div>
 	          <div style={{ margin: '25 50 50 60'}}>
@@ -116,7 +116,7 @@ class HomeView extends React.Component {
 	        Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
 	      </div>
 	    </div>
-	   </div>
+	   </body>
 	  );
   }
 }
