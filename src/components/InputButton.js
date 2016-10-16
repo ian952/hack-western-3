@@ -5,11 +5,26 @@ import cx from 'classnames';
 
 class InputButton extends React.Component {
 
+	handleClick = () => {
+		const data = {
+			group_ID: this.props.pageStore.get('roomID'),
+			person_ID: this.props.userStore.getIn(['user', 'id']),
+			answer: this.props.name
+		}
+    this.props.socket.emit('answer', data, (nextQuestion) => {
+    	if (nextQuestion) {
+    		//last one to emit response
+    		this.props.actions.startVote(nextQuestion);
+    	}
+    	this.props.actions.finishedQuestion();
+    });
+  }
+
 	render() {
 		return (
 			<div className={cx('row', 'button')}>
 				<div className='col-md-2'>
-					<button className='btn btn-brown inputBtn'>
+					<button className='btn btn-brown inputBtn' onClick={this.handleClick}>
 						{this.props.name}
 					</button>
 				</div>

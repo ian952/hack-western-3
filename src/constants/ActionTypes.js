@@ -6,3 +6,5 @@ export const JOIN_ROOM = 'JOIN_ROOM';
 export const START_VOTE = 'START_VOTE';
 export const GET_LOC = 'GET_LOC';
 export const GET_RESULTS = 'GET_RESULTS';
+
+export const FINISHED_QUESTION = 'FINISHED_QUESTION';

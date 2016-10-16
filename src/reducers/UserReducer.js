@@ -31,8 +31,6 @@ export default function UserStore(state = initialState, action) {
 		newState = newState.update('userList', (userList) => userList.push(state.get('user')));
 		return newState;
 
-
-
 	default: 
 		return state;
 	}

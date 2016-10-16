@@ -192,7 +192,7 @@ io.on ('connection', function(socket){
 		}
 	*/
 
-	socket.on('answer', function(data) {
+	socket.on('answer', function(data, dataCallback) {
 		var selected_group = activeGroups.find((group) => group.group_ID == data.group_ID)
 		var selected_person = selected_group.persons.find((person) => person.person_ID == data.person_ID);
 
@@ -205,12 +205,12 @@ io.on ('connection', function(socket){
 
 		if (selected_group.persons.find ((person) => person.answers.length < selected_group.current_question) == undefined) {
 			selected_group.current_question ++;
-
 			yelpService.genQuestion(selected_group.current_question, selected_group).then ((question) => {
 				if (question.done) {
 					activeGroups.remove(activeGroups.indexOf(selected_group));
 				}
 				socket.broadcast.to(data.group_ID).emit('question',question);
+				dataCallback(question);
 			});
 		} else {
 			var peoples_answers = [];
@@ -222,8 +222,8 @@ io.on ('connection', function(socket){
 					});
 				}
 			});
-
 			socket.broadcast.to(data.group_ID).emit('submittedanswers', peoples_answers);
+			dataCallback(null);
 		}
 
 	});

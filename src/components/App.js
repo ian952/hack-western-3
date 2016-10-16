@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import * as userActions from '../actions/UserActions';
 import * as pageActions from '../actions/PageActions';
+import * as questionActions from '../actions/questionActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import HomeView from './HomeView';
@@ -13,7 +14,7 @@ import DistanceView from './DistanceView';
 import QuestionView from './QuestionView';
 import FinalView from './FinalView';
 import * as pages from '../constants/PageTypes';
-const socket = io('http://choosechews.herokuapp.com');
+const socket = io('http://localhost:3000');//io('http://choosechews.herokuapp.com');
 
 class Title extends React.Component {
   constructor(props) {
@@ -123,7 +124,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(Object.assign({},
       userActions,
-      pageActions    
+      pageActions,
+      questionActions  
     ), dispatch)
   }
 }

@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
 	
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
     	isShowingModal: false
@@ -91,7 +91,7 @@ class HomeView extends React.Component {
 	            <div className='row'>
 	              <div className='col-md-3 col-md-offset-4 col-sm-2 col-sm-offset-4'>
 	     				   <button className={cx('roombtn','btn btn-lg', 'btn-brown')}
-	     				   				 onClick={this.makeRoom}>
+	     				   			onClick={this.makeRoom}>
 	     					    Host 
 	     				   </button>
 	              </div>
