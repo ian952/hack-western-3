@@ -1,7 +1,7 @@
 import { USER_JOIN, SET_NAME, MAKE_LEAD } from '../constants/ActionTypes';
 
-export function userJoin() {
-	return { type: USER_JOIN, response: 'Bob' };
+export function userJoin(peopleList) {
+	return { type: USER_JOIN, response: peopleList };
 }
 
 export function setName(name, userID) {

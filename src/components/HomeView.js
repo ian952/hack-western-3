@@ -3,7 +3,6 @@ import '../stylesheets/App.css';
 import cx from 'classnames';      
 import * as userActions from '../actions/UserActions';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
 
@@ -46,20 +45,8 @@ class HomeView extends React.Component {
   		group_ID: roomID
   	};
   	this.props.socket.emit('join', data, (personList) => {
+  		console.log('resolving')
   		this.props.actions.joinRoom(roomID, personList);
-  	});
-  }
-
-  joinRoom = () => {
-  	const userID = this.props.userStore.getIn(['user', 'id']);
-  	const roomID = this.refs.roomForm.value;
-  	const data = {
-  		person_ID: userID,
-  		group_ID: roomID
-  	};
-  	this.props.socket.emit('join', data, () => {
-  		console.log('im out');
-  		this.props.actions.joinRoom(roomID);
   	});
   }
 
@@ -69,13 +56,21 @@ class HomeView extends React.Component {
 	  	<div>
 	  	  {
 	      	this.state.isShowingModal &&
-	        <ModalContainer onClose={this.handleClose}>
+	      	<ModalContainer onClose={this.handleClose}>
 	          <ModalDialog onClose={this.handleClose}>
-	            <h3>Enter your room ID:</h3>
-	            <input ref='roomForm'/>
-	            <button className='btn btn-danger' onClick={this.joinRoom}> Enter </button>
-	          </ModalDialog>
-	        </ModalContainer>
+			        <div className='popupsize' style={{ zoom: '175%'}}>
+		            <div className='row'>
+		            	<h3 className='rubik docenter'>Enter Your Room Number</h3>
+		            </div>
+		            <div className='row docenter'>
+		            	<input ref='roomForm'/>
+		            </div>
+		            <div className='row docenter' style={{ margin: '15 0 0 0'}}>
+		             	<button className='btn btn-danger rubik' onClick={this.joinRoom}> Enter </button>
+		            </div>
+		          </div>
+		         </ModalDialog>
+		       </ModalContainer>
       	}
 		  	<div className='container'>
 		    	<div className={cx('window-size', 'clearfix')}>
