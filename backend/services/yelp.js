@@ -47,10 +47,12 @@ function popularCategory (data){
 		data.businesses.map((bus) => {
 			bus.categories.map ((category) => {
 				var cur = category[0];
-				if (!categoryCount[cur]) {
-					categoryCount[cur] = 1;
-				} else {
-					categoryCount[cur] ++;
+				if (cur != 'Canadian (New)' && cur != 'American (Traditional)') {
+					if (!categoryCount[cur]) {
+						categoryCount[cur] = 1;
+					} else {
+						categoryCount[cur] ++;
+					}
 				}
 				//console.log (cur);
 			});
@@ -150,15 +152,18 @@ function genQuestion (num, selected_group) {
 					var categories = [];
 					data.businesses.map((bus) => {
 						bus.categories.map ((category) => {
-							if (categories.indexOf (category[0]) == -1) {
-								categories.push (category[0]);
-							}
+							var cur = category[0];
+							if (cur != 'Canadian (New)' && cur != 'American (Traditional)') {
+								if (categories.indexOf (category[0]) == -1) {
+									categories.push (category[0]);
+								}
 
-							if (!allCategories[category[0]]) {
-								allCategories[category[0]] = {
-									filter_name: category[1],
-									count: 0
-								};
+								if (!allCategories[category[0]]) {
+									allCategories[category[0]] = {
+										filter_name: category[1],
+										count: 0
+									};
+								}
 							}
 						});
 					});
@@ -259,6 +264,7 @@ function genQuestion (num, selected_group) {
 			//console.log (filter);
 
 			console.log ('start search');
+			console.log (filter);
 			search(filter).then((data) => {
 				console.log ('search done');
 				//finalRestaurants = data.businesses;
@@ -289,7 +295,7 @@ function genQuestion (num, selected_group) {
 					question: 'Pick One:',
 					answers: [finalRestaurants[0], finalRestaurants[1]]
 				});
-			});
+			}).catch(function(err){console.log(err)});
 
 		} else if (num == 6 || num == 7 || num == 8) {
 			var index = (num-5) * 2;
@@ -299,7 +305,7 @@ function genQuestion (num, selected_group) {
 				answers: [finalRestaurants[index], finalRestaurants[index+1]]
 			});
 		} else if (num == 9 || num == 10) {
-			var index = (num - 9) * 2 + 5;
+			var index = (num - 9) * 2 + 5 - 1;
 
 			resolve ({
 				done: false,
@@ -311,7 +317,7 @@ function genQuestion (num, selected_group) {
 			resolve ({
 				done: false,
 				question: 'Pick One:',
-				answers: [getMajorityRes (9,selected_group), getMajorityRes (10,selected_group)]
+				answers: [getMajorityRes (8,selected_group), getMajorityRes (9,selected_group)]
 			});
 
 		} else if (num == 12) {

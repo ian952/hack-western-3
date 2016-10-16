@@ -214,6 +214,7 @@ io.on ('connection', function(socket){
 				if (question.done) {
 					activeGroups.remove(activeGroups.indexOf(selected_group));
 				}
+				console.log (selected_person);
 				console.log (selected_group.current_question);
 				console.log (question);
 				socket.broadcast.to(data.group_ID).emit('question',question);
