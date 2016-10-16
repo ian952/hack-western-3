@@ -16,20 +16,47 @@ function search (location, radius){
 	});
 }
 
-// function popularCategory (data){
-// 	return new Promise ((resolve,reject) => {
+function popularCategory (data){
+	var categoryCount = {};
 
-// 		.then ((data) => {
-			
-// 		})
-// 		.catch ((err) => {
-// 			console.log (err);
-// 		});
-// 	});
-// }
+	return new Promise ((resolve,reject) => {
+		data.businesses.map((bus) => {
+			bus.categories.map ((category) => {
+				var cur = category[0];
+				if (!categoryCount[cur]) {
+					categoryCount[cur] = 1;
+				} else {
+					categoryCount[cur] ++;
+				}
+				//console.log (cur);
+			});
+		});
+
+		//console.log (categoryCount);
+
+		var sortable = [];
+		for (var cat in categoryCount)
+		      sortable.push([cat, categoryCount[cat]]);
+		sortable.sort(
+		    function(a, b) {
+		        return b[1] - a[1];
+		    }
+		);
+
+		var res = [];
+
+		for (var i = 0; i < 5 && i < sortable.length; i++) {
+			res.push (sortable[i][0]);
+		}
+
+		//console.log (res);
+		resolve (res);
+	});
+}
 
 module.exports = (function() {
 	return {
-		search: search
+		search: search,
+		popularCategory: popularCategory
 	}
 })();
