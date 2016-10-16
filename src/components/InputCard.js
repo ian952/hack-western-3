@@ -5,6 +5,7 @@ import cx from 'classnames';
 class InputCard extends React.Component {
 
 	handleClick = () => {
+		console.log('clicked', this.props.answer.toJS())
 		const data = {
 			group_ID: this.props.pageStore.get('roomID'),
 			person_ID: this.props.userStore.getIn(['user', 'id']),
@@ -13,8 +14,9 @@ class InputCard extends React.Component {
     this.props.socket.emit('answer', data, (nextQuestion) => {
     	if (nextQuestion) {
     		//last one to emit response
-
-    		this.props.actions.startVote(nextQuestion);
+    		if (this.props.questionStore.get('qnumber') < 12) {
+    			  this.props.actions.startVote(nextQuestion);
+    		}
     	}
     	this.props.actions.finishedQuestion();
     });

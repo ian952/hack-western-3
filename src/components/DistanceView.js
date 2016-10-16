@@ -56,25 +56,25 @@ class DistanceView extends React.Component {
             <div className='row'>
               <div className='col-sm-12 col-md-3 btncont'>
                 <button className='btn-brown btn btn-danger distBtn' 
-                        onClick={this.setDist.bind(this, 2)}> 
+                        onClick={this.setDist.bind(this, 2000)}> 
                         Within 2km 
                 </button>
               </div>
                <div className='col-sm-12 col-md-3 btncont'>
                 <button className='btn-brown btn btn-danger distBtn'
-                        onClick={this.setDist.bind(this, 5)}> 
+                        onClick={this.setDist.bind(this, 5000)}> 
                         Within 5km
                 </button>
               </div>
                <div className='col-sm-12 col-md-3 btncont'>
                 <button className='btn-brown btn btn-danger distBtn'
-                        onClick={this.setDist.bind(this, 20)}> 
+                        onClick={this.setDist.bind(this, 20000)}> 
                         Within 20km 
                 </button>
               </div>
                <div className='col-sm-12 col-md-3 btncont'>
                 <button className='btn-brown btn btn-danger distBtn'
-                        onClick={this.setDist.bind(this, 40)}> 
+                        onClick={this.setDist.bind(this, 40000)}> 
                         Within 40km 
                 </button>
               </div>
