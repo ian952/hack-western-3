@@ -49,7 +49,7 @@ io.on ('connection', function(socket){
 			databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
 				socket.join(data.group_ID);
 				socket.broadcast.to(data.group_ID).emit('person_list', person_list);
-				returnData();
+				returnData(person_list);
 			});
 		});
 	});

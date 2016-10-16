@@ -33,7 +33,7 @@ class HomeView extends React.Component {
   	};
   	this.props.socket.emit('create', data, (roomID) => {
   		this.props.actions.makeLead();
-  		this.props.actions.joinRoom(roomID);
+  		this.props.actions.joinRoom(roomID, null);
   	});
   }
 
@@ -44,9 +44,8 @@ class HomeView extends React.Component {
   		person_ID: userID,
   		group_ID: roomID
   	};
-  	this.props.socket.emit('join', data, () => {
-  		console.log('im out');
-  		this.props.actions.joinRoom(roomID);
+  	this.props.socket.emit('join', data, (personList) => {
+  		this.props.actions.joinRoom(roomID, personList);
   	});
   }
 
