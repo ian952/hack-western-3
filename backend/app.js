@@ -194,7 +194,7 @@ io.on ('connection', function(socket){
 
 	socket.on('answer', function(data, dataCallback) {
 		//console.log (data);
-		//console.log ('answer');
+		console.log ('answer');
 		var selected_group = activeGroups.find((group) => group.group_ID == data.group_ID)
 		var selected_person = selected_group.persons.find((person) => person.person_ID == data.person_ID);
 
