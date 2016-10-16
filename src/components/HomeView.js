@@ -5,6 +5,7 @@ import * as userActions from '../actions/UserActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
+
 class HomeView extends React.Component {
 	constructor(props) {
     super(props);
@@ -25,13 +26,13 @@ class HomeView extends React.Component {
 
   render() {
   	return(
-	  	<div>
+	  	<div className='potato'>
 		  	<div className='container'>
 		    	<div className={cx('window-size', 'clearfix')}>
-		        <h1 className='header'>
+		        <h1 className='header' style={{ margin: '80 0 0 0'}}>
 		        	Choose Chews
 		        </h1>
-		        <div className='infotext row'>
+		        <div className='infotext row' style={{ margin: '40 0 0 0'}}>
 		          <p1> 
 		            Can't agree on where to eat? 
 		          </p1>
