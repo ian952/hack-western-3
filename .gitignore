@@ -5,7 +5,7 @@ rethinkdb_data/
 node_modules
 /backend/node_modules
 *.log
-.env
+./.env
 
 dev.sh
 
