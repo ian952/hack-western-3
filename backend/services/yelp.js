@@ -3,6 +3,8 @@ var Yelp = require('yelp');
 var location;
 var radius;
 var allCategories = [];
+var sortAns;
+var finalRestaurants;
 /*
 	name:{
 		filter_name:,
@@ -27,9 +29,9 @@ function setup (loc, rad) {
 	});
 }
 
-function search (sortAns){
+function search (filter) {
 	return yelp.search ({
-		category_filter: 'restaurants',
+		category_filter: 'restaurants' + filter,
 		location: location,
 		radius_filter: radius,
 		sort: sortAns
@@ -74,6 +76,36 @@ function popularCategory (data){
 	});
 }
 
+function getMajorityRes (ans,selected_group) {
+	var ansMap = {
+		ans1: 0,
+		ans2: 0
+	};
+	var ans1;
+	var ans2;
+	selected_group.persons.map ((person) => {
+		var answer = person.answers[ans];
+
+		if (!ans1)
+			ans1 = answer;
+		else if (!ans2)
+			ans2 = answer;
+
+		if (ans1 == answer) {
+			ansMap.ans1 ++;
+		} else {
+			ansMap.ans2 ++;
+		}
+	});
+
+	if (ansMap.ans1 > ansMap.ans2) {
+		return ans1;
+	} else {
+		return ans2;
+	}
+
+}
+
 function genQuestion (num, selected_group) {
 	return new Promise ((resolve, reject) => {
 		if (num == 1) {
@@ -94,14 +126,13 @@ function genQuestion (num, selected_group) {
 				}
 			});
 
-			var sortAns;
 			if (prox > rating) {
 				sortAns = 1;
 			} else {
 				sortAns = 2;
 			}
 
-			search (location, radius).then((data) => {
+			search ('').then((data) => {
 				if (num == 2) {
 					popularCategory (data).then((popularCategories) => {
 						var res = {
@@ -173,7 +204,7 @@ function genQuestion (num, selected_group) {
 
 			var res = {
 				done: false,
-				question: 'Pick One',
+				question: 'Pick One:',
 				answers: picked
 			};
 
@@ -203,16 +234,53 @@ function genQuestion (num, selected_group) {
 			    }
 			);
 
-			var res = [];
+			var filter = '';
 
 			//possibly want to randomize the order if they are all the same
 
 			for (var i = 0; i < 8 ; i++) {
-				res.push (sortable[i][1].filter_name);
+				filter += ',' + sortable[i][1].filter_name;
 			}
 
-			resolve ();
+			search(filter).then((data) => {
+				finalRestaurants = data.businesses;
 
+				resolve ({
+					done: false,
+					question: 'Pick One:',
+					answers: [finalRestaurants[0], finalRestaurants[1]]
+				});
+			});
+
+		} else if (num == 6 && num == 7 && num == 8) {
+			var index = (num-5) * 2;
+			resolve ({
+				done: false,
+				question: 'Pick One:',
+				answers: [finalRestaurants[index], finalRestaurants[index+1]]
+			});
+		} else if (num == 9 && num == 10) {
+			var index = (num - 9) * 2 + 5;
+
+			resolve ({
+				done: false,
+				question: 'Pick One:',
+				answers: [getMajorityRes (index,selected_group), getMajorityRes (index+1,selected_group)]
+			});
+			
+		} else if (num == 11) {
+			resolve ({
+				done: false,
+				question: 'Pick One:',
+				answers: [getMajorityRes (9,selected_group), getMajorityRes (10,selected_group)]
+			});
+
+		} else if (num == 12) {
+			resolve ({
+				done: true,
+				question: 'Done',
+				answers: [getMajorityRes (11,selected_group)]
+			});
 		}
 	});
 }
