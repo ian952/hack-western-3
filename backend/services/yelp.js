@@ -135,6 +135,7 @@ function genQuestion (num, selected_group) {
 			}
 
 			search ('').then((data) => {
+				console.log (data);
 				if (num == 2) {
 					popularCategory (data).then((popularCategories) => {
 						var res = {
@@ -142,6 +143,7 @@ function genQuestion (num, selected_group) {
 							question: 'Pick one:',
 							answers: popularCategories
 						};
+						console.log (res);
 						resolve (res);
 					});
 				} else if (num == 4) {
