@@ -11,6 +11,7 @@ import HomeView from './HomeView';
 import RoomView from './RoomView';
 import FormView from './Form';
 import DistanceView from './DistanceView';
+import FinalView from './FinalView';
 import * as pages from '../constants/PageTypes';
 const socket = io('http://localhost:3000');
 
