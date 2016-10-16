@@ -22,6 +22,12 @@ class RoomView extends React.Component {
   	});
   }
 
+  startQuestions() {
+  	this.props.socket.emit('start', () => {
+  		this.props.actions
+  	});
+  }
+
 	render() {
 		const roomNum = this.props.pageStore.get('roomID');
 		const isHost = this.props.userStore.get('host');
@@ -32,7 +38,7 @@ class RoomView extends React.Component {
 					{this.loadPeople()}
 				</div>
 				{isHost && 
-					<button className='btn btn-danger btn-large' onClick={}>
+					<button className='btn btn-danger btn-large' onClick={this.startQuestions}>
 						Start!
 					</button>
 				}

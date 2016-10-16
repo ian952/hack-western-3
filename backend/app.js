@@ -73,7 +73,7 @@ io.on ('connection', function(socket){
 		}
 	*/
 
-	socket.on('start',function(data){
+	socket.on('start',function(data, callbackData){
 		databaseService.getPersonsInGroup(data.group_ID).then((person_list) => {
 			activeGroups.push({
 				group_ID: data.group_ID,
@@ -95,6 +95,7 @@ io.on ('connection', function(socket){
 				socket.broadcast.to(data.group_ID).emit('question',question);
 			});
 		});
+		callbackData();
 
 	});
 
@@ -106,7 +107,7 @@ io.on ('connection', function(socket){
 		}
 	*/
 
-	socket.on ('answer', function(data) {
+	socket.on('answer', function(data) {
 		var selected_group = activeGroups.find((group) => group.group_ID == data.group_ID)
 		var selected_person = selected_group.persons.find((person) => person.person_ID == data.person_ID);
 
