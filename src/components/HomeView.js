@@ -53,7 +53,6 @@ class HomeView extends React.Component {
 
   render() {
   	return(
-	  	<body className='potato'>
 	  	<div>
 	  	  {
 	      	this.state.isShowingModal &&
@@ -111,8 +110,7 @@ class HomeView extends React.Component {
 	      <div className='footer'>
 	        Built by Ian Hu, Alan Li, and William Lo at HackWestern3 
 	      </div>
-	    </div>
-	   </body>
+	    </div>	    
 	  );
   }
 }
