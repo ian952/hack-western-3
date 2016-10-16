@@ -48,32 +48,32 @@ class DistanceView extends React.Component {
               <input type='text' className='cityInput' onBlur={this.handleInput} />
             </div>
             <div className='col-md-6 btnCont'>
-              <button className='btn btn-success locationBtn'> Use Current Location </button>
+              <button className='btn locationBtn btn-grey'> Use Current Location </button>
             </div> 
           </div>
           <div className='row'>
             <h3>Choose distance radius </h3>
             <div className='row'>
               <div className='col-sm-12 col-md-3 btncont'>
-                <button className='btn btn-danger distBtn' 
+                <button className='btn-brown btn btn-danger distBtn' 
                         onClick={this.setDist.bind(this, 2)}> 
                         Within 2km 
                 </button>
               </div>
                <div className='col-sm-12 col-md-3 btncont'>
-                <button className='btn btn-danger distBtn'
+                <button className='btn-brown btn btn-danger distBtn'
                         onClick={this.setDist.bind(this, 5)}> 
                         Within 5km
                 </button>
               </div>
                <div className='col-sm-12 col-md-3 btncont'>
-                <button className='btn btn-danger distBtn'
+                <button className='btn-brown btn btn-danger distBtn'
                         onClick={this.setDist.bind(this, 20)}> 
                         Within 20km 
                 </button>
               </div>
                <div className='col-sm-12 col-md-3 btncont'>
-                <button className='btn btn-danger distBtn'
+                <button className='btn-brown btn btn-danger distBtn'
                         onClick={this.setDist.bind(this, 40)}> 
                         Within 40km 
                 </button>
@@ -81,7 +81,7 @@ class DistanceView extends React.Component {
             </div>
           </div>
           <div className='row startBtnCont'>
-            <button className='btn btn-primary startBtn'
+            <button className='btn-red btn btn-primary startBtn'
                     onClick={this.startQuestions}>
               Start Questions
             </button>

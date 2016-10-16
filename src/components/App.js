@@ -99,7 +99,7 @@ class Title extends React.Component {
   	             <input ref='nameForm'/>
                 </div>
                 <div className='row docenter' style={{ margin: '15 0 0 0'}}>
-  	             <button className='btn btn-danger rubik' onClick={this.submitName}> Enter </button>
+  	             <button className='btn btn-brown rubik' onClick={this.submitName}> Enter </button>
 	              </div>
               </div>
             </ModalDialog>

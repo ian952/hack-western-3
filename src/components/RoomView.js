@@ -46,7 +46,7 @@ class RoomView extends React.Component {
 					{this.loadPeople()}
 				</div>
 				{isHost && 
-					<button className='btn btn-danger btn-large' onClick={this.setLoc}>
+					<button className='btn btn-brown btn-large' onClick={this.setLoc}>
 						Start!
 					</button>
 				}

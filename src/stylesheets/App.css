@@ -98,6 +98,15 @@
 	color: white;
 }
 
+.btn-red{
+	background-color: #3c0101 !important;
+	color: white;
+}
+.btn-dark{
+		background-color: #695a55 !important;
+	color: white;
+}
+
 .roombtn:hover {
   background: black;
   border: 3px solid #d5c2be;
