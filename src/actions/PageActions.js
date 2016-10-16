@@ -7,6 +7,6 @@ export function joinRoom(roomID, personList) {
 export function setLoc() {
 	return { type: GET_LOC };
 }
-export function startVote() {
+export function startVote(question) {
 	return { type: START_VOTE };
 }

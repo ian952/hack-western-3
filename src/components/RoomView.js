@@ -3,11 +3,15 @@ import io from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import '../stylesheets/RoomView.scss';
+
 class RoomView extends React.Component {
 	
 	componentDidMount() {
     this.props.socket.on('person_list', (personList) => {
     	this.props.actions.userJoin(personList);
+    });
+    this.props.socket.on('question', (question) => {
+      this.props.actions.startVote(question);
     });
   }
 

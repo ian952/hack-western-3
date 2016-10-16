@@ -156,10 +156,10 @@ io.on ('connection', function(socket){
 		yelpService.setup (data.location, data.radius).then(() => {
 			yelpService.genQuestion (1).then((question) => {
 				socket.broadcast.to(data.group_ID).emit('question',question);
+				console.log(question);
+				callbackData(question);
 			});
 		});
-		callbackData();
-
 	});
 
 	/*

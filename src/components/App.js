@@ -11,6 +11,7 @@ import HomeView from './HomeView';
 import RoomView from './RoomView';
 import FormView from './Form';
 import DistanceView from './DistanceView';
+import QuestionView from './QuestionView';
 import FinalView from './FinalView';
 import * as pages from '../constants/PageTypes';
 const socket = io('http://localhost:3000');
@@ -59,11 +60,17 @@ class Title extends React.Component {
                   socket={socket}
                   pageStore={this.props.pageStore}
                   userStore={this.props.userStore}
-                  actions={this.props.actions}
-                />
+                  actions={this.props.actions} />
 
       case pages.LOC:
         return <DistanceView 
+                  socket={socket}
+                  pageStore={this.props.pageStore}
+                  userStore={this.props.userStore}
+                  actions={this.props.actions} />
+
+      case pages.VOTE:
+        return <QuestionView 
                   socket={socket}
                   pageStore={this.props.pageStore}
                   userStore={this.props.userStore}
@@ -98,7 +105,7 @@ class Title extends React.Component {
             </ModalDialog>
 	        </ModalContainer>
       	}
-        <DistanceView />
+        {this.routePage()}
 		    </div>
     );
   };
@@ -107,7 +114,8 @@ class Title extends React.Component {
 function mapStateToProps (state) {
 	return {
     userStore: state.UserStore,
-    pageStore: state.PageStore
+    pageStore: state.PageStore,
+    questionStore: state.QuestionStore
   }
 }
 
@@ -115,7 +123,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(Object.assign({},
       userActions,
-      pageActions
+      pageActions    
     ), dispatch)
   }
 }
