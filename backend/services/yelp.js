@@ -4,7 +4,7 @@ var location;
 var radius;
 var allCategories = [];
 var sortAns;
-var finalRestaurants;
+var finalRestaurants = [];
 /*
 	name:{
 		filter_name:,
@@ -256,8 +256,26 @@ function genQuestion (num, selected_group) {
 			//console.log (filter);
 
 			search(filter).then((data) => {
-				finalRestaurants = data.businesses;
+				//finalRestaurants = data.businesses;
+
+				data.businesses.map((business) => {
+					var temp_categories = [];
+
+					business.categories.map ((category) => {
+						temp_categories.push (category[0]);
+					});
+
+					finalRestaurants.push({
+						rating_img_url: business.rating_img_url,
+						name: business.name,
+						categories:temp_categories,
+						img_url: business.image_url
+					});
+
+				});
+
 				//console.log (data);
+				//console.log (finalRestaurants);
 
 				resolve ({
 					done: false,

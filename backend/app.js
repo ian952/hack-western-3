@@ -24,67 +24,68 @@ app.get ('/', function(req, res) {
 });
 
 //tests
-// var test_group = {
-// 	persons: [
-// 	{person_ID:1, answers:['Proximity']},
-// 	{person_ID:2, answers:['Rating']}
-// 	]
-// };
-	
-// yelpService.setup ('University of Western Ontario', 5000).then(() => {
-// 	yelpService.genQuestion (2, test_group).then((question) => {
-// 		//socket.broadcast.to(data.group_ID).emit('question',question);
-// 		console.log (2);
-// 		console.log (question);
-// 	});
-// });
+if (process.env.TEST == '1') {
+	var test_group = {
+		persons: [
+		{person_ID:1, answers:['Proximity']},
+		{person_ID:2, answers:['Rating']}
+		]
+	};
+		
+	yelpService.setup ('University of Western Ontario', 5000).then(() => {
+		yelpService.genQuestion (2, test_group).then((question) => {
+			//socket.broadcast.to(data.group_ID).emit('question',question);
+			console.log (2);
+			console.log (question);
+		});
+	});
 
-// var test_group = {
-// 	persons: [
-// 	{person_ID:1, answers:['Proximity','Sandwiches']},
-// 	{person_ID:2, answers:['Rating', 'Pubs']}
-// 	]
-// };
-	
-// yelpService.setup ('University of Western Ontario', 5000).then(() => {
-// 	yelpService.genQuestion (3, test_group).then((question) => {
-// 		//socket.broadcast.to(data.group_ID).emit('question',question);
-// 		console.log (3);
-// 		console.log (question);
-// 	});
-// });
+	var test_group = {
+		persons: [
+		{person_ID:1, answers:['Proximity','Sandwiches']},
+		{person_ID:2, answers:['Rating', 'Pubs']}
+		]
+	};
+		
+	yelpService.setup ('University of Western Ontario', 5000).then(() => {
+		yelpService.genQuestion (3, test_group).then((question) => {
+			//socket.broadcast.to(data.group_ID).emit('question',question);
+			console.log (3);
+			console.log (question);
+		});
+	});
 
-// var test_group = {
-// 	persons: [
-// 	{person_ID:1, answers:['Proximity','Sandwiches','Korean']},
-// 	{person_ID:2, answers:['Rating', 'Pubs','Chinese']}
-// 	]
-// };
-	
-// yelpService.setup ('University of Western Ontario', 5000).then(() => {
-// 	yelpService.genQuestion (4, test_group).then((question) => {
-// 		//socket.broadcast.to(data.group_ID).emit('question',question);
-// 		console.log (4);
-// 		console.log (question);
-// 	});
-// });
+	var test_group = {
+		persons: [
+		{person_ID:1, answers:['Proximity','Sandwiches','Korean']},
+		{person_ID:2, answers:['Rating', 'Pubs','Chinese']}
+		]
+	};
+		
+	yelpService.setup ('University of Western Ontario', 5000).then(() => {
+		yelpService.genQuestion (4, test_group).then((question) => {
+			//socket.broadcast.to(data.group_ID).emit('question',question);
+			console.log (4);
+			console.log (question);
+		});
+	});
 
-// setTimeout(function() {
-// 	var test_group = {
-// 		persons: [
-// 		{person_ID:1, answers:['Proximity','Sandwiches','Italian','Burgers']},
-// 		{person_ID:2, answers:['Rating', 'Pubs','Chinese', 'Italian']}
-// 		]
-// 	};
-// 	yelpService.setup ('University of Western Ontario', 5000).then(() => {
-// 		yelpService.genQuestion (5, test_group).then((question) => {
-// 			//socket.broadcast.to(data.group_ID).emit('question',question);
-// 			console.log (5);
-// 			console.log (question);
-// 		});
-// 	});
-// }, 2000);
-
+	setTimeout(function() {
+		var test_group = {
+			persons: [
+			{person_ID:1, answers:['Proximity','Sandwiches','Italian','Burgers']},
+			{person_ID:2, answers:['Rating', 'Pubs','Chinese', 'Italian']}
+			]
+		};
+		yelpService.setup ('University of Western Ontario', 5000).then(() => {
+			yelpService.genQuestion (5, test_group).then((question) => {
+				//socket.broadcast.to(data.group_ID).emit('question',question);
+				console.log (5);
+				console.log (question);
+			});
+		});
+	}, 2000);
+}
 //end tests
 
 io.on ('connection', function(socket){
@@ -133,6 +134,21 @@ io.on ('connection', function(socket){
 			done:,
 			question:,
 			answers:[]
+		}
+
+		For Q 5 - 11
+		answers contain objects: {
+			rating_img_url: 
+			name:
+			categories:[]
+			img_url: 
+		}
+
+		For Q 12
+		question: {
+			done: true,
+			question: 'done',
+			answers: [the restaurant object]
 		}
 	*/
 
