@@ -25,7 +25,6 @@ class DistanceView extends React.Component {
           <input type="text" />
         </form>
       </div>
-
     );
   }
 } 
