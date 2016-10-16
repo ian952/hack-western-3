@@ -34,7 +34,19 @@ class HomeView extends React.Component {
   	};
   	this.props.socket.emit('create', data, (roomID) => {
   		this.props.actions.makeLead();
-  		this.props.actions.joinRoom(roomID);
+  		this.props.actions.joinRoom(roomID, null);
+  	});
+  }
+
+  joinRoom = () => {
+  	const userID = this.props.userStore.getIn(['user', 'id']);
+  	const roomID = this.refs.roomForm.value;
+  	const data = {
+  		person_ID: userID,
+  		group_ID: roomID
+  	};
+  	this.props.socket.emit('join', data, (personList) => {
+  		this.props.actions.joinRoom(roomID, personList);
   	});
   }
 

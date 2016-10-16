@@ -13,7 +13,7 @@ export default function UserStore(state = initialState, action) {
 
 	case JOIN_ROOM:
 		newState = state.set('currPage', pages.ROOM);
-		newState = newState.set('roomID', action.response);
+		newState = newState.set('roomID', action.response.roomID);
 		return newState;
 
 	case START_VOTE: 
